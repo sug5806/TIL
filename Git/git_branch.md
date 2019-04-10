@@ -67,4 +67,6 @@ Master 브랜치는 사용자에게 보여지기 때문에  개발자는 develop
 * develop 브랜치를 만들어도 기능 개발을 할때는 브랜치를 또 만들어서 해야한다 
 
 * git flow feature start Name : Name의 브랜치를 생성하고 checkout 한다
+   * 자식 브랜치를 만들고나서 파일을 수정하고 꼭 commit을 해야 가지가 쳐진다.
+
 * git flow feature finish Name : Name의 브랜치를 상위 브랜치와 merge하고 Name의 브랜치는 삭제 한다(**remote와 local에서 같이 지운다**)
