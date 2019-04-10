@@ -1,0 +1,5 @@
+I am your father!
+What is your name?
+Single responsibility
+Liskov substitution
+Open-Closed principle
