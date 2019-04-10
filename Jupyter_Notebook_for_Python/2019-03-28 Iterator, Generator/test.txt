@@ -1,0 +1,12 @@
+Single responsibility principle
+Open-Closed principle
+Liskov substitution principle
+Interface segregation principle
+Denpendency inversion principle
+
+
+
+
+
+
+asdf
