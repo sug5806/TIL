@@ -53,7 +53,6 @@ class BST():
             return
 
         while True:
-            parent = cur
             if new_node.key > cur.key:
                 cur = cur.right
                 if not cur:
@@ -104,13 +103,14 @@ class BST():
                 replace = cur.left
                 while replace.right:
                     replace = replace.right
+                # 교체할 키 값을 루트보다 작은 값중에서 가장 큰값을 기준으로 잡음
                 # 삭제 노드와 대체 노드의 키를 교환
                 cur.key, replace.key = replace.key, cur.key
                 cur.left, rem = self.__remove_recursion(cur.left, replace.key)
         return cur, None
                             
     def remove(self, target):
-        self.root, removed = self._BST__remove_recursion(self.root, target)
+        self.root, removed = self.__remove_recursion(self.root, target)
         if removed:
             removed.left = removed.right = None
         return removed
