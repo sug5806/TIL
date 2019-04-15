@@ -9,7 +9,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-^prac.py
+^prac.py/
 
 # C extensions
 *.so
