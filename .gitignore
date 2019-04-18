@@ -10,7 +10,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 ^prac.py/
-
+.idea/
+.vscode/
 # C extensions
 *.so
 
