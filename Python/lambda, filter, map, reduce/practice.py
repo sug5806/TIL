@@ -1,3 +1,4 @@
+# reduce는 내장함수가 아님
 from functools import reduce
 
 
@@ -7,10 +8,10 @@ def pred(x):
 
 li.sort(key=pred, reverse=True)
 
-li.sort(key= lambda x : x % 2)
+li.sort(key=lambda x : x % 2)
 
 #
-li = [1, -2, 6, -21, 34, 29, -92, 7]
+li = [1, -2, 6, -21, 34, 29, -92, 7,]
 li2 = list(filter(lambda x : x>0, li))
 print(f"filter 양수반환 {li2}")
 
@@ -21,7 +22,7 @@ print(f'map 양수인 각 원소를 제곱하여 출력 : {li2}')
 # 하나씩 뽑아서 계산
 li3 = reduce(lambda a, b : a+b, li)
 print(f'reduce li에서 하나씩 뽑아서 계산 : {li3}')
-print(f'sume 위와 같음 : {sum(li)}')
+print(f'sum 위와 같음 : {sum(li)}')
 
 
 li = ['a', 'a', 'b', 'c', 'e', 'q', 't', 't', 'w', 'c']
