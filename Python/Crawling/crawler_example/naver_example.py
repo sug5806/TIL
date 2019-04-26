@@ -15,8 +15,8 @@ url = "https://www.naver.com/"
 # 크름에 Postman 이라는 확장프로그램을 설치하라
 
 req = requests.get(url)
-print(req.status_code)
-print(type(req.status_code))
+#print(req.status_code)
+#print(type(req.status_code))
 
 # requests 모듈 안에 명세를 해놓음
 if req.status_code == requests.codes.ok:
