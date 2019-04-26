@@ -15,15 +15,15 @@ url = "https://www.naver.com/"
 # 크름에 Postman 이라는 확장프로그램을 설치하라
 
 req = requests.get(url)
-#print(req.status_code)
-#print(type(req.status_code))
+# print(req.status_code)
+# print(type(req.status_code))
 
 # requests 모듈 안에 명세를 해놓음
 if req.status_code == requests.codes.ok:
     print('접속 성공')
     # 여기서 데이터를 해석하면 된다
     # req.text  받아온 데이터가 담겨져 있다
-    #print(req.text)
+    # print(req.text)
     html = BeautifulSoup(req.text, "html.parser")
 
     # select와 select_one의 차이점은 select_one()은 해당하는 것중 제일 첫번째만 반환
@@ -31,8 +31,6 @@ if req.status_code == requests.codes.ok:
     # print("span1", span1)
     # # 목록에 있는것 20개 돌아가고있는것 40
     # print(len(span1))
-
-
 
     # ~어떤 요소를 찾고
     # 그 요소 안에 각각의 요소를 다시 찾을 수 있다.
@@ -43,19 +41,8 @@ if req.status_code == requests.codes.ok:
         keyword = item.select_one('.ah_k')
         rank = item.select_one('.ah_r')
         link = item.select_one('.ah_a')
-        #link['속성명']
+        # link['속성명']
         print(rank.text, keyword.text, link['href'])
 
 else:
     print('접속 실패')
-
-
-
-
-
-
-
-
-
-
-
