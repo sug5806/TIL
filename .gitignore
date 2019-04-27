@@ -12,6 +12,7 @@ __pycache__/
 ^prac.py/
 .idea/
 .vscode/
+
 # C extensions
 *.so
 
