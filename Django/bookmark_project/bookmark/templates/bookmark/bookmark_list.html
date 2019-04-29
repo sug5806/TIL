@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+<!--//
+C - 객체를 생성 -> 객체 필요 X
+R - 단일 object
+U - 단일 object
+D - 단일 object
+L - 복수 객체 object_list
+
+CSS Framework
+1. Bootstrap
+2. Falt UI
+3. Material Design Lite : Google - Android랑 디자인이 비슷하다
+//-->
+
+{% block title %}
+Block List
+{% endblock %}
+
+{% block content %}
+{# bookmark 목록 출력하기 #}
+{% for object in object_list %}
+<a href="{% url 'bookmark:detail' object.id %}">{{object.id}} {{object.site_name}}</a>{{object.url}}<br>
+{% endfor %}
+{% endblock %}
