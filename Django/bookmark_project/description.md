@@ -134,4 +134,15 @@ CSS Framework
 
 ---
 
-과제 : 오늘한거 복습,  bootstrap 보기, 개인 프로젝트에 오늘한거 적용하
+과제 : 오늘한거 복습,  bootstrap 보기, 개인 프로젝트에 오늘한거 적용하기
+
+
+---
+
+배포 Deploy : 서버에 올린다.
+1. Pyhonanywhere /w Github
+    1. github에 소스코드 업로드, requirements도 같이
+    2. pythonanywhere.com에 가입
+2. Heroku
+3. AWS Linux FTP
+4. AWS EB

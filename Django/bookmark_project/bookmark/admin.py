@@ -22,7 +22,7 @@ class BookmarkOptions(admin.ModelAdmin):
     search_fields = ['site_name']
     # raw_id_fields : 선택값을 입력값으로 바꿔줌
     # 관리자 페이지에 커스텀 페이지 추가
-    # 관리자 페이지에 action 추가
+    # 관리자 페이지에 action 추
 
 
 # Bookmark를 관리할때 BookmarkOptions라는 옵션을 추가하겠다.
