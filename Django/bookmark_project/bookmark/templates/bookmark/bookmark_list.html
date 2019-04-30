@@ -16,9 +16,40 @@ CSS Framework
 Block List
 {% endblock %}
 
+
 {% block content %}
 {# bookmark 목록 출력하기 #}
-{% for object in object_list %}
-<a href="{% url 'bookmark:detail' object.id %}">{{object.id}} {{object.site_name}}</a>{{object.url}}<br>
-{% endfor %}
+<div class="row">
+    <div class="col"></div>
+    <div class="col-12 col-xl-8 col-md-4">
+
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">site_name</th>
+                <th scope="col">url</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Update</th>
+                <th scope="col">Content</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for object in object_list %}
+            <tr>
+                <td>{{object.id}}</td>
+                <td><a href="{% url 'bookmark:detail' object.id %}" class="btn btn-outline-primary">{{object.site_name}}</a><br></td>
+                <td>{{object.url}}</td>
+                <td><a href="{% url 'bookmark:delete' object.id %}" class="btn btn-outline-danger">D</a></td>
+                <td><a href="{% url 'bookmark:update' object.id %}" class="btn btn-outline-info">U</a></td>
+                <td>{{object.content}}</td>
+
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col"></div>
+</div>
 {% endblock %}

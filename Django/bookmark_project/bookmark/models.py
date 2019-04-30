@@ -6,6 +6,7 @@ from django.db import models
 class Bookmark(models.Model):
     site_name = models.CharField(max_length=50)
     url = models.URLField()
+    content = models.TextField(blank=True)
 
     created = models.DateTimeField(auto_now_add=True)
 
@@ -17,6 +18,6 @@ class Bookmark(models.Model):
         return "Site name : " + self.site_name + ", URL : " + self.url
 
     # 메타 클래스는 옵션 클래스 -> 내가 상속을 받았는데, 속성값에 변경이 필요하다면 사용
-    class Meta:
-        # 정렬 : 필드값 -> 필드값 오름차순, -필드이름 -> 필드값 내림차순
-        ordering = ['site_name']
+    # class Meta:
+    #     # 정렬 : 필드값 -> 필드값 오름차순, -필드이름 -> 필드값 내림차순
+    #     ordering = ['site_name']

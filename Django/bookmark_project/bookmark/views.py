@@ -20,7 +20,7 @@ class BookmarkCreate(CreateView):
     model = Bookmark
     # fileds는 사용자가 입력할 모델 필드를 정하는 것
     # DB에서 지정한 필드명과 동일해야 하는듯?
-    fields = ['site_name', 'url']
+    fields = ['site_name', 'url', 'content']
     template_name_suffix = '_create'
     success_url = '/'
     # _create
@@ -37,9 +37,9 @@ class BookmarkDelete(DeleteView):
 
 class BookmarkUpdate(UpdateView):
     model = Bookmark
-    fields = ['site_name', 'url']
+    fields = ['site_name', 'url', 'content']
     template_name_suffix = '_update'
-    # 업데이트를 하고난 뒤 돌아갈 페이
+    # 업데이트를 하고난 뒤 돌아갈 페이지
     success_url = '/'
     # _update
     # _form

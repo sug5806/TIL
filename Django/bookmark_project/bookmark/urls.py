@@ -10,7 +10,7 @@ urlpatterns = [
     # 함수형 뷰 : 이름만 쓴다
     # 클래스형 뷰 : 이름.as_view()
     path('', BookmarkList.as_view(), name='index'),
-    path('create/', BookmarkCreate.as_view(), name='crate'),
+    path('create/', BookmarkCreate.as_view(), name='create'),
     path('delete/<int:pk>/', BookmarkDelete.as_view(), name='delete'),
     path('update/<int:pk>/', BookmarkUpdate.as_view(), name='update'),
     path('detail/<int:pk>/', BookmarkDetail.as_view(), name='detail'),

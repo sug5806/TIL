@@ -1,12 +1,23 @@
 {% extends 'base.html' %}
-
 {% block title %}
 Delete
 {% endblock %}
 
+
 {% block content %}
-<form action="" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Delete Ok">
-</form>
-{% endblock }
+<div class="row">
+    <div class="col"></div>
+    <div class="col-12 col-xl-8">
+        <div class="alert alert-danger" role="alert">
+            Do you want to delete {{object}}?
+        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-outline-danger" value="Delete Ok">
+            <a href="/" class="btn btn-outline-dark">cancel</a>
+        </form>
+
+    </div>
+    <div class="col"></div>
+</div>
+{% endblock %}

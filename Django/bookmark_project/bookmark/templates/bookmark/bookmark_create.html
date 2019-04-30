@@ -5,9 +5,18 @@ Create
 {% endblock %}
 
 {% block content %}
-<form action="" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Create">
-</form>
+<div class="row">
+    <div class="col"></div>
+    <div class="col-12 col-xl-8">
+        <form action="" method="post">
+            <div class="alert alert-primary" role="alert">
+                Please insert bookmark information
+            </div>
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Create">
+        </form>
+    </div>
+    <div class="col"></div>
+</div>
 {% endblock %}

@@ -5,9 +5,19 @@ Update
 {% endblock %}
 
 {% block content %}
-<form action="" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Update">
-</form>
+<div class="row">
+    <div class="col"></div>
+    <div class="col-12 col-xl-8">
+        <div class="alert alert-info" role="alert">
+            Please change bookmark information.
+        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" class="btn btn-outline-info" value="Update">
+            <a href="/" class="btn btn-outline-dark">cancel</a>
+        </form>
+    </div>
+    <div class="col"></div>
+</div>
 {% endblock %}
