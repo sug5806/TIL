@@ -7,15 +7,16 @@ Create
 {% block content %}
 <div class="row">
     <div class="col"></div>
-    <div class="col-12 col-xl-8">
+    <div class="col-12 col-xl-6">
         <div class="alert alert-primary" role="alert">
             Please insert bookmark information
         </div>
-        <form action="" method="post">
-
+        <!--// # 사진을 사진자체로 보내기위해 entype을 추가
+        # 추가 안하면 사진도 텍스트파일로 전송 //-->
+        <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{form.as_p}}
-            <input type="submit" value="Create">
+            <input type="submit" value="create">
         </form>
     </div>
     <div class="col"></div>
