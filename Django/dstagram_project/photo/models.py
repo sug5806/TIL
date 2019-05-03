@@ -4,12 +4,15 @@ from django.db import models
 # 커스텀할때 이것을 사용하는것이 좋다
 
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 # User모델은 확장 가능
 # settings.AUTH_USER_MODEL
 
 from django.urls import reverse
 # get_absloute_url을 사용하기 위함
 # reverse : url pattern 이름을 가지고 주소를 만들어주는 함수
+
+from django.http import HttpResponseRedirect
 
 # Create your models here.
 # 기본 모델
@@ -26,7 +29,7 @@ from django.urls import reverse
 """
 
 class Insta(models.Model):
-    author = models.ForeignKey(User, on_delete = models.CASCADE, related_name='photos')
+    author = models.ForeignKey(get_user_model(), on_delete = models.CASCADE, related_name='photos')
            # models.ForeignKey(get_user_model(), )
     # author = models.ForeignKey(연결되는 모델, 삭제시 동작, 연관 이름)
     # CASCADE : 유저가 탈퇴하면 사진도 싹 지운다.
@@ -41,6 +44,8 @@ class Insta(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    like = models.ManyToManyField(User, related_name='like_post', blank=True)
 
     class Meta:
         ordering = ['-created']

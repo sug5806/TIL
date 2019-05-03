@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -37,8 +36,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'accounts.apps.AccountsConfig',
     'photo.apps.PhotoConfig',
+    'disqus',
+    'django.contrib.sites',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +62,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                # 모든 변수에 전달해주는 것을 만드는것
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -119,11 +122,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+# Image를 띄우기위한 static파일 설정
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
+# media 폴더를 지정하여 업로드되는 image파일을 관리함
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# 로그인 후에 위의 URL로 가게 할수 있다
 LOGIN_REDIRECT_URL ='/'
-# 로그인 후에 위의 URL로 가게 할수 있따
+
+# django-disqus : DB가 필요가 없다. (disqus.com가 대신 관리) -> migrate 필요
+# django.contrib.sites : 우리 프로젝트 사이트 정보 관리 -> migrate 필요
+DISQUS_WEBSITE_SHORTNAME = 'my-dstagram'
+# django.contrib.sites를 설정하는 것
+SITE_ID = 1
+

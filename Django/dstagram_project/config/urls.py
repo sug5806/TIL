@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -22,14 +24,11 @@ urlpatterns = [
     path('account/', include('accounts.urls')),
 ]
 
-
-
-
 # 특정 리소스를 static 형태로 응답
-from django.conf.urls.static import static
+
 
 # 장고의 셋팅값을 불러다 주는 역할
-from django.conf import settings
+
 
 # 개발 상태일때만 사용 -> Deploy, Live 일 때는 사용하지 않는다.
 # 1) 웹 서버가 해줘야 할일

@@ -120,6 +120,7 @@ CSS Framework
     <input type="submit" value="Create">
 </form>
 ```
+
 추가, 수정, 삭제의 경우 해당 기능을 완료한 후에 이동할 페이지가 필요하다.  
 1. view 클래스에 success_url 이라는 속성값을 지정
 2. model에 get_absolute_url이라는 메서드를 만든다.

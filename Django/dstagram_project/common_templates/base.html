@@ -31,8 +31,64 @@
         {% endif %}
     </div>
 </nav>
+{% load static %}
+
+<style>
+    .btn-like{
+        display:inline-block; /* html 요소의 영역 표시 속성 */
+        /*
+           inline : text형태 컨텐츠가 있는만큼 영역을 차지 하는 형태, 한줄에 여러 요소가 있을 수 있다.
+           block : 한줄을 단독으로 차지하고, 크기는 지정할 수 있다.
+           inline-block : text형태로 한줄에 여러 요소가 함께 있을 수 있지만, 크기도 지정할 수 있다.
+        */
+
+        width: 24px; /* 너비 */
+        height: 24px; /* 높이 */
+        background:url({% static 'images/Images.png' %}); /* 배경 이미지 */
+        background-position: -231px -131px; /* 배경 이미지 포지션 */
+        text-indent: -9999px; /* 영역 안에 있는 텍스트의 들여쓰기 */
+        overflow: hidden; /* 영역 바깥으로 밀려난 컨텐츠의 표시여부 */
+        border:none; /* 테두리 여부 */
+    }
+
+    /*
+        어떤 요소를 클릭했을 때, class를 더하거나 빼서 효과를 변경한다.
+     */
+    .btn-like.active{
+        background-position: -231px -105px; /* 배경 이미지 포지션 */
+    }
+
+    .btn-save{
+        display:inline-block; /* html 요소의 영역 표시 속성 */
+        width: 19px; /* 너비 */
+        height: 24px; /* 높이 */
+        background:url({% static 'images/Images.png' %}); /* 배경 이미지 */
+        background-position: -211px -255px; /* 배경 이미지 포지션 */
+        text-indent: -9999px; /* 영역 안에 있는 텍스트의 들여쓰기 */
+        overflow: hidden; /* 영역 바깥으로 밀려난 컨텐츠의 표시여부 */
+        border:none; /* 테두리 여부 */
+    }
+
+     .btn-save.active{
+        background-position: -331px -105px; /* 배경 이미지 포지션 */
+    }
 
 
+</style>
+<div id="Image"></div>
+
+</body>
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="cor-6"></div>
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}}">{{message}}</div>
+        {% endfor %}
+        <div class="col"></div>
+    </div>
+
+</div>
 {% block content %}
 
 {% endblock %}
@@ -50,5 +106,21 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
+<script type="text/javascript">
+    $(function() {
+        $('.btn-like').click(function(e){
+            e.preventDefault();
+            $(this).toggleClass('active');
+            $(this).blur();
+        });
+
+        $('.btn-save').click(function(e){
+            e.preventDefault();
+            $(this).toggleClass('active');
+            $(this).blur();
+        });
+    });
+
+</script>
 </body>
 </html>
