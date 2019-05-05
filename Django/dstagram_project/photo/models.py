@@ -46,7 +46,11 @@ class Insta(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     like = models.ManyToManyField(User, related_name='like_post', blank=True)
+####
 
+    save = models.ManyToManyField(User, related_name='save_post', blank=True)
+
+####
     class Meta:
         ordering = ['-created']
 

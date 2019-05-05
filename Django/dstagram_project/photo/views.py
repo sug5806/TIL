@@ -66,7 +66,7 @@ class Instadelete(DeleteView):
 
     # get, post : 로직을 수행하고, 템플릿을 랜더링 한다.
     # view를 만들때마다 get과 post를 별도로 만들어야한다.
-    # patch로만 할수는 없다. Ex) delete를 get형식으로만 해야한다
+    # dispatch로만 할수는 없다. Ex) delete를 get형식으로만 해야한다
 
     # def get(self, request, *args, **kwargs):
     #     object = self.get_object()
