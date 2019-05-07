@@ -127,6 +127,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 # 로그인 후 profile 페이지 대신 이동할 페이지 주소 설정
 LOGIN_REDIRECT_URL = '/'
 
+from django.urls import reverse_lazy
+LOGIN_URL = reverse_lazy('accounts:signin')
+
 
 
 

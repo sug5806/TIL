@@ -32,12 +32,16 @@ class Photo(models.Model):
     # 특정값으로 셋팅 -
 
     text = models.TextField(blank=True)
-    image = models.ImageField(upload_to='timeline_photo/%Y/%m/%d')
+
     # upload_to는 함수를 사용해서 폴더를 동적으로 설정할 수 있다.
+    image = models.ImageField(upload_to='timeline_photo/%Y/%m/%d')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     like = models.ManyToManyField(User, related_name='like_post', blank=True)
+
+    # 예약어를 필드명으로 사용하면 안된다.
+    favorite = models.ManyToManyField(User, related_name='favorite_post', blank=True)
 
     class Meta:
         ordering = ['-created']

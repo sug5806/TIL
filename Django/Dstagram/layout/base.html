@@ -28,6 +28,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'accounts:signout' %}">Sign-out</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'photo:like_list' %}">Like_List</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'photo:favorite_list' %}">Favorite_List</a>
+                </li>
             {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'accounts:signin' %}">Sign-in</a>
@@ -116,9 +124,9 @@
         });
 
         $('.btn-save').click(function(e) {
-            e.preventDefault();
-            $(this).toggleClass('active');
-            $(this).blur();
+            {# e.preventDefault(); #}
+            {# $(this).toggleClass('active'); #}
+            {# $(this).blur(); #}
         });
     });
 </script>
