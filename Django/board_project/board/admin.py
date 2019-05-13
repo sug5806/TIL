@@ -20,4 +20,4 @@ class DocumentOption(admin.ModelAdmin):
 
 
 admin.site.register(Category, CategoryOption)
-admin.site.register(Document)
+admin.site.register(Document, DocumentOption)

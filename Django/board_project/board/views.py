@@ -1,5 +1,12 @@
+from django.contrib.auth.decorators import login_required
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from django.shortcuts import redirect
 from django.shortcuts import render
+from django.urls import reverse
+from django.utils.text import slugify
 
+from .forms import DocumentForm
 from .models import Document
 
 
@@ -21,12 +28,6 @@ def document_list(request):
     return render(request, 'board/document_list.html', {'object_list': documents})
 
 
-from .forms import DocumentForm
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
-from django.urls import reverse
-
-
 # 로그인한 사용자만 글쓰기가 가능하다
 @login_required
 def document_create(request):
@@ -43,6 +44,7 @@ def document_create(request):
         # 작성자필드 author_id를 로그인한 사용자의 id로 정한다
         form.instance.author_id = request.user.id
         if form.is_valid():
+            # form.instance.slug = slugify(form.instance.title)
             document = form.save()
             # reverse : 이름을 기준으로 url을 만들어준다.
             return redirect(reverse('board:detail', args=[document.id]))
@@ -51,6 +53,11 @@ def document_create(request):
         # 입력 창을 보여줌
         form = DocumentForm()
     return render(request, 'board/document_create.html', {'form': form})
+
+
+@receiver(pre_save, sender=Document)
+def pre_save (sender, instance, **kwargs):
+    instance.slug = slugify(instance.title)
 
 
 def document_update(request, document_id):
@@ -74,7 +81,6 @@ def document_update(request, document_id):
     else:
         # instance를 통해 객체를
         form = DocumentForm(instance=Document.objects.get(pk=document_id))
-
 
     return render(request, 'board/document_update.html', {'form': form})
 

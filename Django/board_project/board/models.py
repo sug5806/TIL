@@ -18,7 +18,7 @@ class Category(models.Model):
         ordering = ['slug']
 
     def __str__(self):
-        return self.name + " " + self.slug
+        return self.name
 
 
 
@@ -36,4 +36,4 @@ class Document(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.author + " " + self.title + " " + self.created + " " + self.updated
+        return self.title
