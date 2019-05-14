@@ -5,8 +5,50 @@
 {% endblock %}
 
 {% block content %}
-{% for object in object_list %}
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8 col-md-6 col-lg-10">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">title</th>
+                    <th scope="col">text</th>
+                    <th scope="col">image.url</th>
+                    <th scope="col">username</th>
+                    <th scope="col">Detail</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for object in object_list %}
+                    <tr>
+                        <td>{{ object.id }}</td>
+                        <td>{{ object.title }}</td>
+                        <td>{{ object.text }}</td>
+                        <td>{{ object.image.url }}</td>
+                        <td>{{ object.author.username }}</td>
+                        <td><a href="{% url 'board:detail' object.id %}" class="btn btn-success">상세정보</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
-    {{ object.title }} {{ object.text }} {{ object.image.url }} {{ object.author.username }}<br>
-{% endfor %}
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+{#                    <li class="page-item">#}
+{#                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>#}
+{#                    </li>#}
+
+                    {% for page in range %}
+                        <li class="page-item"><a class="page-link" href="{% url 'board:list' %}?page={{ page }}">{{ page }}</a></li>
+                    {% endfor %}
+
+{#                    <li class="page-item">#}
+{#                        <a class="page-link" href="{% url 'board:list' %} ?page={{ page }}" tabindex="+1">Next</a>#}
+{#                    </li>#}
+                </ul>
+            </nav>
+        </div>
+        <div class="col"></div>
+    </div>
 {% endblock %}

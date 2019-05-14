@@ -4,10 +4,12 @@ from django.db import models
 
 # Create your models here.
 
-# class Board(models.Model):
-#     pass
+# 하나의 웹사이트
+class Board(models.Model):
+    name = models.CharField(max_length=20)
 
 class Category(models.Model):
+    # board = models.ForeignKey(Board, on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=20)
     slug = models.SlugField(max_length=30, db_index=True, unique=True, allow_unicode=True, blank=True)
     description = models.CharField(max_length=200, blank=True)
@@ -24,6 +26,7 @@ class Category(models.Model):
 
 class Document(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, related_name='documents')
+    board = models.ForeignKey(Board, on_delete=models.SET_NULL, null=True)
 
     # User 모델을 커스텀한 경우, 불러다 써야한다
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='documents')
@@ -34,6 +37,7 @@ class Document(models.Model):
     image = models.ImageField(upload_to='board_images/%Y/%m/%d')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
 
     def __str__(self):
         return self.title

@@ -5,5 +5,19 @@
 {% endblock %}
 
 {% block content %}
-    {{ object.title }} {{ object.text }} {{ object.image.url }} {{ object.author.username }}<br>
+<div class="row">
+    <div class="col"></div>
+    <div class="col-8 col-md-6 col-lg-8">
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ object.title }}</h5>
+                <p class="card-text">{{ object.text }}</p>
+                <a href="{% url 'board:update' object.id %}" class="btn btn-warning">수정</a>
+                <a href="{% url 'board:delete' object.id %}" class="btn btn-danger">삭제</a>
+            </div>
+        </div>
+    </div>
+    <div class="col"></div>
+</div>
 {% endblock %}
