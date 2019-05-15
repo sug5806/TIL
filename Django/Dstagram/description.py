@@ -24,3 +24,28 @@ follow 기능 -> ajax로 follow, unfollow, timeline구현
 * DM 구현
 7. INSTALLED_APPS에 추가
 """
+
+
+# 과제 1:
+"""
+신규 프로젝트 생성 - onlineshop project
+1) postgreSQL 셋팅
+2) S3 셋팅 - 도메인 연결된 형태
+3) 관리자 화면 띄우기
+"""
+
+
+# 과제 2:
+"""
+기존 프로젝트에
+1) postgreSQL 셋팅
+2) S3 셋팅 - 도메인 연결된 상태 (media, static)
+"""
+
+
+# 과제 3:
+"""
+1) PythonAnywhere에서 MySQL 세팅
+1-1) PythonAnywhere 자체에 있는 MySQL로 할것
+1-2) 한글이 깨짐, 해결하기
+"""

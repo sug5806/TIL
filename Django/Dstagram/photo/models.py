@@ -40,7 +40,7 @@ class Photo(models.Model):
 
     like = models.ManyToManyField(User, related_name='like_post', blank=True)
 
-    # 예약어를 필드명으로 사용하면 안된다.
+    # 예약어를 필드명으로 사용하면 안된다. save -> favorite
     favorite = models.ManyToManyField(User, related_name='favorite_post', blank=True)
 
     class Meta:

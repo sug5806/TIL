@@ -50,7 +50,7 @@ class PhotofavoriteList(LoginRequiredMixin, ListView):
 from django.shortcuts import redirect
 class PhotoCreate(CreateView):
     model = Photo
-    fields = ['image','text']
+    fields = ['image', 'text']
     template_name = 'photo/photo_create.html'
     success_url = '/'
 
@@ -64,7 +64,7 @@ class PhotoCreate(CreateView):
             return redirect('/')
         else:
             # 올바르지 않다면
-            return self.render_to_response({'form':form})
+            return self.render_to_response({'form' : form})
 
 class PhotoUpdate(UpdateView):
     model = Photo
@@ -153,10 +153,9 @@ class PhotoLike(View):
                     photo.like.add(user)
             # 레퍼러 얻기
             referer_url = request.META.get('HTTP_REFERER')
-            # https://www.naver.com
-            # /blog/doc/1234/
-            # ?id=2223
-            # domain, path, query
+            # https://www.naver.com   - domain
+            # /blog/doc/1234/  - path
+            # ?id=222   - query
             # path
             path = urlparse(referer_url).path
             return HttpResponseRedirect(path)
@@ -194,3 +193,31 @@ class PhotoSave(View):
             path = urlparse(referer_url).path
             return HttpResponseRedirect(path)
 
+
+# signal
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
+import boto3
+from django.conf import settings
+
+
+@receiver(post_delete, sender=Photo)
+    # 데코레이터로 붙여놨기 때문에 함수명은 상관이 없다
+def post_delete(sender, instance, **kwargs):
+    storage = instance.image.storage
+    if storage.exists('media/' + str(instance.image)):
+        storage.delete(str(instance.image))
+
+    # session = boto3.Session(
+    #     aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+    #     aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+    #     region_name=settings.AWS_REGION
+    # )
+    # s3 = session.resource('s3')
+    # # instance가 전달 받은 객체
+    # # s3.Object는 s3에 업로드된 파일 객체를 얻어오는 클래스
+    # # arg1 = 버킷네임
+    # # arg2 = 파일 경로 - Key
+    #
+    # image = s3.Object(settings.AWS_STORAGE_BUCKET_NAME, "media/" + str(instance.image))
+    # image.delete()
