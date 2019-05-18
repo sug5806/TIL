@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8 col-md-6 col-lg-8">
+
+        {% if document_list == None and category_list == None and board_list == None %}
+            찾는 페이지가 없습니다
+        {% else %}
+        {% if document_list != None %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">작성자</th>
+                    <th scope="col">title</th>
+                    <th scope="col">text</th>
+                    <th scope="col">Board</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Detail</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for document in document_list %}
+                    <tr>
+                        <td>{{ document.id }}</td>
+                        <td>{{ document.author.username }}</td>
+                        <td>{{ document.title }}</td>
+                        <td>{{ document.text }}</td>
+                        <td>{{ document.board }}</td>
+                        <td>{{ document.category }}</td>
+                        <td><a href="{% url 'board:detail' document.id %}" class="btn btn-success">상세정보</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+
+
+
+        {% if category_list != None %}
+            <table class="table table-striped">
+                <caption>카테고리</caption>
+                <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Category</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for object in category_list %}
+                    <tr>
+                        <td>{{ object.id }}</td>
+                        <td>{{ object.name }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+
+
+        {% if board_list != None %}
+            <table class="table table-striped">
+                <caption>게시판</caption>
+                <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Board</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for object in board_list %}
+                    <tr>
+                        <td>{{ object.id }}</td>
+                        <td>{{ object.name }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+
+
+        {#            <nav aria-label="Page navigation example">#}
+        {#                <ul class="pagination justify-content-center">#}
+        {#                    <li class="page-item">#}
+        {#                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>#}
+        {#                    </li>#}
+
+        {#                    {% for page in range %}#}
+        {#                        <li class="page-item"><a class="page-link" href="{% url 'board:list' %}?page={{ page }}">{{ page }}</a></li>#}
+        {#                    {% endfor %}#}
+
+        {#                    <li class="page-item">#}
+        {#                        <a class="page-link" href="{% url 'board:list' %} ?page={{ page }}" tabindex="+1">Next</a>#}
+        {#                    </li>#}
+        {#                </ul>#}
+        {#            </nav>#}
+    </div>
+    {% endif %}
+    <div class="col"></div>
+    </div>
+{% endblock %}

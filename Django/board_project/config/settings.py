@@ -39,6 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages',
     'board',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.naver',
 ]
 
 MIDDLEWARE = [
@@ -156,4 +161,45 @@ DEFAULT_FILE_STORAGE = 'config.asset_storage.MediaStorage'
 # STATIC_URL = '/static/'
 
 
+# LOGGING = {
+#     'version':1,
+#     # 오버라이드 한것이지만 기존에 있는 애들도 사용하므로 False를 해놓았다
+#     'disable_existing_loggers' : False,
+#     'handlers': {
+#         'console': {
+#             'class' : 'logging.StreamHandler',
+#         },
+#     },
+#     'loggers' : {
+#         'django':{
+#             'handlers':['console'],
+#             'level' : 'DEBUG',
+#         },
+#
+#     },
+# }
 
+# DEBUG 레벨에서 일어나는 일들은 console에서 처리한다?
+# DEBUG를 안하고 임시로 보고싶다
+"""
+import logging
+l = logging.getLogger('django.db.backends')
+l.setLevel(logging.DEBUG)다
+l.addHandler(logging.StreamHandler())
+"""
+
+
+# 통합 User Model - 현재
+# 소셜커머스 : 고객, 판매자, 관리자 -> User Model -> Group
+
+AUTHENTICATION_BACKENDS = (
+    # 로그인을 할때 판매자로 로그인할지 구매자로 로그인할지 같은 것을 구분하는 것을 여기서 한다
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'

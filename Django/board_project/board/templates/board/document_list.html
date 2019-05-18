@@ -7,32 +7,41 @@
 {% block content %}
     <div class="row">
         <div class="col"></div>
-        <div class="col-8 col-md-6 col-lg-10">
+        <div class="col-8 col-md-6 col-lg-8">
             <table class="table table-striped">
                 <thead>
                 <tr>
                     <th scope="col">id</th>
                     <th scope="col">title</th>
-                    <th scope="col">text</th>
-                    <th scope="col">image.url</th>
-                    <th scope="col">username</th>
+                    <th scope="col">작성자</th>
+                    <th scope="col">Board</th>
+                    <th scope="col">Category</th>
                     <th scope="col">Detail</th>
                 </tr>
                 </thead>
                 <tbody>
+
                 {% for object in object_list %}
-                    <tr>
+                    <tr class="document_row">
                         <td>{{ object.id }}</td>
                         <td>{{ object.title }}</td>
-                        <td>{{ object.text }}</td>
-                        <td>{{ object.image.url }}</td>
                         <td>{{ object.author.username }}</td>
+                        <td>{{ object.board }}</td>
+                        <td>{{ object.category }}</td>
                         <td><a href="{% url 'board:detail' object.id %}" class="btn btn-success">상세정보</a></td>
                     </tr>
                 {% endfor %}
+
                 </tbody>
             </table>
 
+        <div class="data_area">
+            데이터가 입력될 곳
+        </div>
+
+        <a href="{% url 'board:get_data_ajax' %}" class="btn_get_data btn btn-info">데이터 가져오기</a>
+
+{#Pagination 구현#}
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
 {#                    <li class="page-item">#}
@@ -40,7 +49,7 @@
 {#                    </li>#}
 
                     {% for page in range %}
-                        <li class="page-item"><a class="page-link" href="{% url 'board:list' %}?page={{ page }}">{{ page }}</a></li>
+                        <li class="page-item"><a class="page-link btn_get_document" href="{% url 'board:list' %}?page={{ page }}">{{ page }}</a></li>
                     {% endfor %}
 
 {#                    <li class="page-item">#}
@@ -51,4 +60,54 @@
         </div>
         <div class="col"></div>
     </div>
+{% endblock %}
+
+
+{## Todo 2019-05-17 금요일수업#}
+{% block extra_script %}
+        <script type="text/javascript">
+// 1. 버튼을 누르면 페이지 이동이 안되도록하기
+// 2. 데이터를 가져오기
+$(function () {
+    // 페이지 로딩이 끝나면 할일들
+    $('.btn_get_data').click(function(e){
+        e.preventDefault(); // 버튼이 클릭하면 이동 못하게 기본 기능 취소
+        {#alert('clicked!!!'); // 확인을 위해 알림창 띄우기#}
+
+        url = $(this).attr('href'); // this = 이벤트의 대상, 여기서는(btn_get_data)
+        alert(url);
+        $.ajax({
+            // ajax 호출이 사용하는 매개변수
+            url:url
+        }).done(function(data){
+            // 호출이 끝나면 받은 데이터를 처리하는 부분
+            {#alert(data.name);#}
+            nm = data.name;
+            age = data.age;
+            bloodtype = data.bloodtype;
+            html = "<ul><li>"+nm+"</li><li>"+age+"</li><li>"+bloodtype+"</li></ul>";
+            $('.data_area').html(html);
+        });
+    });
+
+    $('.btn_get_document').click(function(e){
+        e.preventDefault();
+        {#alert('click!!!');#}
+        // 페이지번호를 누르면 url 가져옴
+        url = $(this).attr('href');
+        alert(url)
+        $.get({
+            url:url
+
+        }).done(function(object_list){
+            alert(object_list)
+            console(object_list)
+            {#$('#comment_list tbody').prepend(data.html);#}
+            $('.document_row').load('object_list')
+
+        });
+    });
+});
+
+        </script>
 {% endblock %}

@@ -16,8 +16,135 @@
                 <a href="{% url 'board:update' object.id %}" class="btn btn-warning">수정</a>
                 <a href="{% url 'board:delete' object.id %}" class="btn btn-danger">삭제</a>
             </div>
+
+
+
+{#            <div>#}
+{#                <form action="{" method="post">#}
+{#                    {% csrf_token %}#}
+{#                    {{ comment_form.as_table }}#}
+{#                    <input type="submit" value="댓글달기">#}
+{##}
+{#                    {% for co in comments %}#}
+{#                    {{ co.text }} {{ co.created }} {{ co.updated }}<br>#}
+{#                    {% endfor %}#}
+{#                </form>#}
+{#            </div>#}
+
+            <div>
+                <form action="{% url 'board:comment_create' object.id %}" method="post" id="comment-form">
+                    <input type="hidden" name="is_ajax" value="">
+                    {% csrf_token %}
+                    {{ comment_form.as_p }}
+                    <input type="submit" value="댓글달기">
+                </form>
+
+                <div id="docs_comment_list_area">
+                    {% include 'board/comment_list.html' %}
+                </div>
+
+            </div>
+
         </div>
     </div>
     <div class="col"></div>
 </div>
+{% endblock %}
+{% block extra_script %}
+
+<script type="text/javascript">
+$(function () {
+    // 1. 누구한테 이벤트를 설정할 것이냐?
+    // 2. 어떤 이벤트를 설정할 것이냐?
+    $('#comment-form').submit(function(e){
+        // return false를 하면 submit을 눌러도 제출이 안됨
+        {#alert('댓글쓰기 완료');#}
+        // 3. 댓글 남기기
+        $('input[name="is_ajax"]').val("1");
+        url = $(this).attr('action');
+        params = $(this).serialize();
+        $.ajax({
+            url:url,
+            method:'POST',
+            data: params
+        }).done(function(data){
+            // data.html
+            {#tr = '<tr>\#}
+            {#    <td colspan="3">댓글내용</td>\#}
+            {#    <td>작성자</td>\#}
+            {#    <td>작성일</td>\#}
+            {#    <td><a href="" class="btn btn-warning btn-sm">update</a></td>\#}
+            {#    <td><a href="" class="btn btn-danger btn-sm">delete</a></td>\#}
+            {#</tr>';#}
+
+            $('#id_text').val('');
+            // tbody 시작 지점에 요소 끼워넣기 -> 최신 댓글이 맨 위에 있음
+            // tbody 뒤에 넣으려면 append
+            $('#comment_list tbody').prepend(data.html);
+            $("input[name='is_ajax']").val("");
+
+        });
+        return false;
+    });
+
+    $('.btn_comment_delete').click(function(e) {
+        e.preventDefault();
+        var input = confirm('댓글을 삭제하시겠습니까?');
+        if (input == true){
+            comment = $(this).parents('tr'); // 버튼을 감싸고 있는 tr 찾기
+            url = $(this).attr('href')+"?is_ajax=1"; // ajax 호출임을 구분할 수 있게 값 추가
+
+            // ajax 호출
+            $.ajax({
+                url:url
+            }).done(function(data){
+                if(data.works){
+                    comment.remove();
+                }
+            });
+            alert('댓글을 삭제하였습니다.');
+        }
+    });
+
+
+    $('.btn_comment_update').click(function(e) {
+        e.preventDefault();
+        url = $(this).attr('href')+'?is_ajax=1';
+        comment = $(this).parent().siblings('.comment_text'); // 원래 댓글을 찾음
+        ////////////////////////////////////////////////////////////
+        input = "<input type='text' class ='update_text' value='"+comment.text()+"'>";
+        comment.html(input);
+        $(input).keypress(function(e){
+            if (e.keyCode==13){
+                text = $(this).val();
+                $.ajax({
+                    url:url,
+                    data:{
+                        text:text
+                    }
+                }).done(function(data){
+                    if(data.works){
+                        comment.text(text);
+                    }
+                });
+            }
+        });
+        return false;
+        ////////////////////////////////////////////////////////////
+        text = prompt('수정될 댓글 내용을 입력하세요.', comment.text()); // 원래 댓글을 프롬프트로 보여줌
+        if(text==null) return false;
+        $.ajax({
+            url:url,
+            data:{
+                text:text,
+            }
+        }).done(function(data){
+            if(data.works){
+                comment.text(text);
+            }
+        });
+    })
+});
+
+</script>
 {% endblock %}
