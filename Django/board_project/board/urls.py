@@ -6,6 +6,7 @@ app_name = 'board'
 
 urlpatterns = [
     path('', document_list, name='list'),
+    path('aj', get_data_list, name='aj'),
     path('search/', search_list, name='search'),
     path('create/', document_create, name='create'),
     path('comment/create/<int:document_id>/', comment_create, name='comment_create'),

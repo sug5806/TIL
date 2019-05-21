@@ -59,7 +59,7 @@ def search_list(request):
     # documents = documents[start_index:end_index]
 
     return render(request, 'board/search_list.html',
-                  {'document_list': documents, 'board_list':boards, 'category_list' : categorys, })
+                  {'document_list': documents, 'board_list': boards, 'category_list' : categorys, })
 
 
 def document_list(request):
@@ -379,7 +379,7 @@ def comment_update(request, comment_id):
 
 def comment_delete(request, comment_id):
 
-    is_ajax = request.POST.get('is_ajax')
+    is_ajax = request.GET.get('is_ajax') if 'is_ajax' in request.GET else request.POST.get('is_ajax', False)
 
     comment = get_object_or_404(Comment, pk=comment_id)
     document = get_object_or_404(Document, pk=comment.document.id)
@@ -399,7 +399,7 @@ def comment_delete(request, comment_id):
         comment.delete()
         return redirect(document)
     else:
-        return render(request, 'board/comment_delete.html', {'object':comment})
+        return render(request, 'board/comment_delete.html', {'object': comment})
 
 
 def document_detail(request, document_id):
@@ -475,6 +475,8 @@ def get_data_ajax(request):
     }
     return JsonResponse(data)
 
+import json
+
 def get_data_list(request):
     page = int(request.GET.get('page', 1))
     paginated_by = 5
@@ -483,11 +485,21 @@ def get_data_list(request):
     total_count = len(documents)
     start_index = paginated_by * (page - 1)
     end_index = paginated_by * page
-    documents = documents[start_index:end_index]
 
-    html = render_to_string('board/document_list.html',
-                            {'object_list': documents,
-                             'range': range(1, math.ceil(total_count / paginated_by) + 1),
-                             }
-                            )
-    return JsonResponse({'html' : html}, )
+    documents = documents[start_index:end_index]
+    rng = range(1, math.ceil(total_count/paginated_by)+1)
+
+    context = {
+                'object_list': documents,
+               'range': rng,
+               }
+
+    # json_obj = render_to_string('board/document_list.html', context)
+    return JsonResponse({'object_list': documents})
+
+    #
+    # return render(request, 'board/document_list.html',
+    #               {'object_list': documents,
+    #                'range': rng,
+    #                }
+    #               )

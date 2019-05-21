@@ -8,32 +8,10 @@
     <div class="row">
         <div class="col"></div>
         <div class="col-8 col-md-6 col-lg-8">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">title</th>
-                    <th scope="col">작성자</th>
-                    <th scope="col">Board</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Detail</th>
-                </tr>
-                </thead>
-                <tbody>
 
-                {% for object in object_list %}
-                    <tr class="document_row">
-                        <td>{{ object.id }}</td>
-                        <td>{{ object.title }}</td>
-                        <td>{{ object.author.username }}</td>
-                        <td>{{ object.board }}</td>
-                        <td>{{ object.category }}</td>
-                        <td><a href="{% url 'board:detail' object.id %}" class="btn btn-success">상세정보</a></td>
-                    </tr>
-                {% endfor %}
-
-                </tbody>
-            </table>
+        <div class="data_list_area">
+            {% include 'board/document_list2.html' %}
+        </div>
 
         <div class="data_area">
             데이터가 입력될 곳
@@ -91,21 +69,17 @@ $(function () {
     });
 
     $('.btn_get_document').click(function(e){
-        e.preventDefault();
-        {#alert('click!!!');#}
-        // 페이지번호를 누르면 url 가져옴
-        url = $(this).attr('href');
-        alert(url)
-        $.get({
-            url:url
+       e.preventDefault();
+       // 페이지번호를 누르면 url 가져옴
+       url = $(this).attr('href');
 
-        }).done(function(object_list){
-            alert(object_list)
-            console(object_list)
-            {#$('#comment_list tbody').prepend(data.html);#}
-            $('.document_row').load('object_list')
+       $.ajax({
+           url:url
+       }).done(function(data){
+            var rp_list = $(data).find('.table');
+            $('.table').html(rp_list);
 
-        });
+       });
     });
 });
 

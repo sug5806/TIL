@@ -1,0 +1,8 @@
+<tr class="document_row">
+    <td>{{ object.id }}</td>
+    <td>{{ object.title }}</td>
+    <td>{{ object.author.username }}</td>
+    <td>{{ object.board }}</td>
+    <td>{{ object.category }}</td>
+    <td><a href="{% url 'board:detail' object.id %}" class="btn btn-success">상세정보</a></td>
+</tr>

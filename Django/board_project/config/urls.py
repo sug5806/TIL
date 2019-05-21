@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from django.conf import settings
 
 
 urlpatterns = [
@@ -24,3 +25,13 @@ urlpatterns = [
     path('', include('board.urls')),
     path('accounts/', include('allauth.urls')),
 ]
+
+
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('debug/', include(debug_toolbar.urls)),
+    ] + urlpatterns
+
+
