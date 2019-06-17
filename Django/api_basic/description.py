@@ -9,4 +9,7 @@ API - Serializer 를 이용
 
 있는 정보 : serializers
 없는 정보 : View
+
+
+API 고급 기술 : Token에 만료기한을 정해 갱신기능 추가하
 """

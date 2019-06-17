@@ -1,10 +1,10 @@
-from django.contrib.auth import get_user_model
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
 from tweet.models import Tweet
+from .permissons import *
 from .serializers import ListSerializer, Serializer
 
-from .permissons import *
 
 # Create your views here.
 
@@ -17,6 +17,8 @@ from .permissons import *
 class TweetListCreateView(generics.ListCreateAPIView):
     queryset = Tweet.objects.all()
     serializer_class = ListSerializer
+    search_fields = ('text', 'author__username')
+
 
     def create(self, request, *args, **kwargs):
         request.data['author'] = request.user.id
@@ -27,5 +29,4 @@ class TweetDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Tweet.objects.all()
     serializer_class = Serializer
     # 권한 체크
-    permission_classes = [IsOwnerAndAdminOnly]
-
+    permission_classes = [IsAuthenticated, IsOwnerAndAdminOnly]

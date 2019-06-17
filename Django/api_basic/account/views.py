@@ -19,6 +19,8 @@ class UserListView(generics.ListAPIView):
     queryset = get_user_model().objects.all()
     serializer_class = UserListSerializer
 
+    filterset_fields = ('username', 'first_name')
+
     def get_queryset(self):
         queryset = super().get_queryset()
 
