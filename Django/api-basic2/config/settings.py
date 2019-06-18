@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'accounts',
     'photo',
     'rest_framework',
+    'rest_framework_swagger',
+    'rest_framework.authtoken',
+
 
 ]
 
@@ -150,10 +153,23 @@ USE_L10N = True
 USE_TZ = True
 
 
-
-
-
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+
+"""
+1) 전체 뷰에 대해서 토큰 인증방식 적용 - 일부는 제외
+- settings.py에 설정 추가
+
+2) 일부 선택해서 토큰 인증방식 적용
+- 각 View에 인증 클래스 추가
+"""
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}

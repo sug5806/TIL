@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+from django.shortcuts import resolve_url
 # Create your models here.
 
 class Photo(models.Model):
@@ -15,3 +16,6 @@ class Photo(models.Model):
 
     class Meta:
         ordering = ['-updated', '-created']
+
+    def get_absolute_url(self):
+        return resolve_url('photo_detail', self.id)
