@@ -1,11 +1,17 @@
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from rest_framework import generics
+from django.http import HttpResponse
 
 from .models import Photo
 from .serializers import *
 
 
 # Create your views here.
+
+def index(request):
+    return HttpResponse('index')
+
+
 class PhotoList(ListView):
     model = Photo
     template_name = 'photo/photo_list.html'
