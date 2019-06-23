@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{# 등록한 필터 사용하기 #}
+{% load example %}
+{{3|add_two }}
+
+{# 등록한 태그 사용하기 #}
+{% print_template %}
+
+
+{# 태그를 실행한 결과를 변수로 저장하기 #}
+{% print_template as test %}
+{{ test }}
+
+{# 등록한 필터 사용 #}
+{{ 'string1'|string_append:'string2' }}
+</body>
+</html>
