@@ -1,0 +1,25 @@
+FROM    ubuntu:18.04
+MAINTAINER    sug5806@gmail.com
+
+RUN apt-get -y update
+RUN apt-get -y install nginx
+RUN apt-get -y install vim
+RUN apt-get -y install python3-dev python3-pip python3-venv
+
+RUN useradd -b /home -m -s /bin/bash django
+RUN usermod -a -G www-data django
+
+RUN mkdir -p /var/www/django
+RUN mkdir -p /var/www/django/run
+RUN mkdir -p /var/www/django/logs
+RUN mkdir -p /var/www/django/ini
+
+ADD ./conf/nginx/default /etc/nginx/sites-available/default
+ADD ./conf/uwsgi/uwsgi.ini /var/www/django/ini/uwsgi.ini
+ADD ./conf/requirements.txt /var/www/django/requirements.txt
+
+RUN python3 -m venv /var/www/django/venv
+RUN /var/www/django/venv/bin/pip3 install -r /var/www/django/requirements.txt
+RUN /var/www/django/venv/bin/django-admin startproject config /var/www/django
+
+CMD ["nginx", "-g", "daemon off;"]
