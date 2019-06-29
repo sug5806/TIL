@@ -16,8 +16,8 @@ def index(request):
 
 
 def results(request, question_id):
-    response = "You're looking at the request of question %s."
-    return HttpResponse(response % question_id)
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'polls/results.html', {'question': question})
 
 
 def detail(request, question_id):
