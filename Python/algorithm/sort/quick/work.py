@@ -1,50 +1,31 @@
-import random as rd
+def quick_sort(arr, start, end):
 
-def get_pivot_index(li, start, mid, end):
-    
-    idx_li = [start, mid, end]
-    if li[idx_li[0]] > li[idx_li[1]]:
-        idx_li[0], idx_li[1] = idx_li[1], idx_li[0]
-    if li[idx_li[1]] > li[idx_li[2]]:
-        idx_li[1], idx_li[2] = idx_li[2], idx_li[1]
-    if li[idx_li[0]] > li[idx_li[1]]:
-        idx_li[0], idx_li[1] = idx_li[1], idx_li[0]
-
-    return idx_li[1]
-     
-def quick_sort(li, start, end):
+    # 종료조건
     if start >= end:
         return
-
     left = start
     right = end
-    mid = (start+end)//2
-    pivot_idx = get_pivot_index(li, left, mid, right)
-    li[pivot_idx], li[mid] = li[mid], li[pivot_idx]
+    pivot = arr[(left + right) // 2]
 
+    # left 와 right 가 교차하기 전이라면
     while left <= right:
-        while li[left] < li[pivot_idx]:
+        while arr[left] < pivot:
             left += 1
-        while li[right] > li[pivot_idx]:
-            right -= 1
 
+        while arr[right] > pivot:
+            right -= 1
 
         if left <= right:
-            li[left], li[right] = li[right], li[left]
+            arr[left], arr[right] = arr[right], arr[left]
             left += 1
             right -= 1
 
-    quick_sort(li, start, right)
-    quick_sort(li, left, end)
+    quick_sort(arr, start, right)
+    quick_sort(arr, left, end)
 
 
 if __name__ == "__main__":
-    while True:
-        num_data = int(input("데이터 개수(종료:0) : "))
-        if not num_data:
-            break
+    arr = [7, 2, 5, 12, 3, 10, 4, 19]
+    quick_sort(arr, 0, len(arr)-1)
+    print(arr)
 
-        data = [rd.randint(1,100) for _ in range(num_data)]
-        print(data)
-        quick_sort(data, 0, len(data)-1)
-        print(data)
