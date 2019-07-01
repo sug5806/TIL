@@ -1,32 +1,19 @@
-import random
-import time
-
-def selection_sort(li):
-    n = len(li)
-    for i in range(n-1):
-        min_idx = i
-        for j in range(i+1, n):
-            if li[min_idx] > li[j]:
-                min_idx = j
-        li[min_idx], li[j] = li[j], li[min_idx]
+# 해당 위치에 어울리는 값을 '선택'한다
 
 
+def selection_sort(arr):
+    n = len(arr)
+
+    for i in range(0, n-1):
+        min_index = i
+        for j in range(i + 1, n):
+            if arr[min_index] > arr[j]:
+                min_index = j
+        arr[i], arr[min_index] = arr[min_index], arr[i]
+        print(arr)
 
 
+if __name__ == "__main__":
+    arr = [7, 2, 5, 12, 3, 10, 1]
+    selection_sort(arr)
 
-
-
-
-if __name__=="__main__":
-    while True:
-        num_data=int(input('데이터 개수(종료:0):'))
-        if not num_data:
-            break
-        start = time.time()
-        data=[random.randint(1, 100) for _ in range(num_data)]
-        end = time.time()
-        elips = end - start
-        print(data)
-        selection_sort(data)
-        print(data)
-        print("{:0.2f}".format(elips))  
