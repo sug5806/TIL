@@ -1,24 +1,21 @@
-import random
+# 이미 정렬된 리스트에 적절한 곳에 삽입시키므로 삽입정렬이다.
 
-def insert(li):
-    n = len(li)
-    temp = None
+
+def insertion_sort(arr):
+    n = len(arr)
     for i in range(1, n):
-        temp = li[i]
-        j = i -1
-        while j >= 0 and li[j] > temp:
-            li[j + 1] = li[j]
-            j -= 1
-        li[j + 1] = temp
-        
-        
+        temp = arr[i]
+        j = i - 1
+        while j != -1:
+            if arr[j] > temp:
+                arr[j + 1] = arr[j]
+                j -= 1
+            else:
+                break
+        arr[j + 1] = temp
 
-if __name__=="__main__":
-    while True:
-        num_data=int(input('데이터 개수(종료:0):'))
-        if not num_data:
-            break
-        data=[random.randint(1, 100) for _ in range(num_data)]
-        print(data)
-        insert(data)
-        print(data)
+
+if __name__ == "__main__":
+    arr = [7, 2, 5, 12, 3, 10]
+    insertion_sort(arr)
+    print(arr)
