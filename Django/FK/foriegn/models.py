@@ -18,7 +18,7 @@ class Author(models.Model):
 
 class Entry(models.Model):
     blog = models.ForeignKey(Blog, related_name='entrys', on_delete=models.CASCADE)
-    headline = models.CharField(max_length1=100)
+    headline = models.CharField(max_length=100)
     pub_date = models.DateField(auto_now_add=True)
     mod_date = models.DateField(auto_now=True)
 
