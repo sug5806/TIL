@@ -2,12 +2,14 @@ from django.db import models
 
 # Create your models here.
 
+
 class Blog(models.Model):
     name = models.CharField(max_length=100)
     tagline = models.TextField()
 
     def __str__(self):
         return self.name
+
 
 class Author(models.Model):
     name = models.CharField(max_length=50)
@@ -21,6 +23,7 @@ class Entry(models.Model):
     headline = models.CharField(max_length=100)
     pub_date = models.DateField(auto_now_add=True)
     mod_date = models.DateField(auto_now=True)
+    author = models.ManyToManyField(Author, related_name='authors')
 
     def __str__(self):
         return self.headline
