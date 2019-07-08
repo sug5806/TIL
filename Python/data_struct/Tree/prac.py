@@ -50,6 +50,91 @@ def post_order(node):
     print(node.data, end=' ')
 
 
+class Stack:
+    def __init__(self, data):
+        self.container = list()
+        self.data = data
+
+    def is_empty(self):
+        if not self.container:
+            return True
+
+        else:
+            return False
+
+    def push(self, data):
+        self.container.append(data)
+
+    def pop(self):
+        ret = self.container.pop()
+        return ret
+
+    def peek(self):
+        return self.container[-1]
+
+
+def iter_preorder(cur):
+    s = Stack(cur)
+
+    while True:
+        while cur:
+            print(cur.data, end="  ")
+            s.push(cur)
+            cur = cur.left_child
+        if s.is_empty():
+            break
+
+        cur = s.pop()
+        cur = cur.right_child
+
+
+def iter_inorder(cur):
+    s = Stack(cur)
+
+    while True:
+        while cur:
+            s.push(cur)
+            cur = cur.left_child
+        if s.is_empty():
+            break
+        cur = s.pop()
+        print(cur.data, end="  ")
+        cur = cur.right_child
+
+
+def iter_postorder(cur):
+    s1 = Stack()
+    s2 = Stack()
+
+    s1.push(cur)
+    while not s1.is_empty():
+        cur = s1.pop()
+        if cur.left:
+            s1.push(cur.left_child)
+        if cur.right:
+            s1.push(cur.right_child)
+        s2.push(cur)
+
+    while not s2.is_empty():
+        cur = s2.pop()
+        print(cur.data, end="  ")
+
+
+from queue import Queue
+
+
+def level_order(cur):
+    q = Queue()
+
+    q.put(cur)
+    while not q.empty():
+        cur=q.get()
+        print(cur.date, end="  ")
+        if cur.left_child:
+            q.put(cur.left_child)
+        if cur.right_child:
+            q.put(cur.right_child)
+
 if __name__ == '__main__':
     n1 = TreeNode(1)
     n2 = TreeNode(2)
@@ -71,3 +156,10 @@ if __name__ == '__main__':
     in_order(n1)
     print()
     post_order(n1)
+    print()
+    print()
+    iter_preorder(n1)
+    print()
+    iter_inorder(n1)
+    print()
+    iter_postorder(n1)

@@ -81,7 +81,7 @@ def iter_preorder(cur):
             print(cur.data, end="  ")
             stack.push(cur)
             cur = cur.left
-        cur = stack.pop()
+        cur = stack.pop
         if cur is None:
             break
         cur = cur.right
@@ -94,7 +94,7 @@ def iter_inorder(cur):
         while cur:
             stack.push(cur)
             cur = cur.left
-        cur = stack.pop()
+        cur = stack.pop
         # 모드 노드의 순회가 끝났다
         if not cur:
             break
@@ -111,7 +111,7 @@ def iter_postorder(cur):
 
     # stack1이 비어있으면 종료
     while not stack1.empty():
-        cur=stack1.pop()
+        cur=stack1.pop
         stack2.push(cur)
 
         if cur.left:
@@ -121,7 +121,7 @@ def iter_postorder(cur):
             stack1.push(cur.right)
 
     while not stack2.empty():
-        cur=stack2.pop()
+        cur=stack2.pop
         print(cur.data, end='  ')
 
 
