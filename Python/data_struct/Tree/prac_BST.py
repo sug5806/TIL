@@ -43,7 +43,6 @@ class BST:
         if not cur:
             return
 
-        print(cur.key)
         self.preorder(cur.left)
         self.preorder(cur.right)
 
@@ -69,7 +68,18 @@ class BST:
                     return
 
     def search(self, target):
-        pass
+        cur = self.__root
+        while cur:
+            if cur.key == target:
+                return cur
+            elif target <= cur.key:
+                cur = cur.left
+            else:
+                cur = cur.right
+
+        return None
+        # return cur
+
 
     def delete(self, target):
         pass
@@ -90,4 +100,10 @@ if __name__ == '__main__':
     bst.preorder(bst.root)
     print()
     bst.insert(5)
-    bst.preorder(cur.data)
+    bst.preorder(bst.root)
+    print()
+    ret = bst.search(9)
+    if ret:
+        print(f'{ret.key} is found')
+    else:
+        print("No Such data")
