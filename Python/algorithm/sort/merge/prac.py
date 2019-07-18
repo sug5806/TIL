@@ -2,7 +2,7 @@
 
 def merge(arr, start, mid, end):
     left = start
-    right = mid+1
+    right = mid + 1
     li = []
 
     while left <= mid and right <= end:
@@ -23,7 +23,7 @@ def merge(arr, start, mid, end):
         li.append(arr[left])
         left += 1
 
-    arr[start:end+1] = li
+    arr[start:end + 1] = li
 
 
 def merge_sort(arr, start, end):
@@ -31,11 +31,11 @@ def merge_sort(arr, start, end):
     if start >= end:
         return
 
-    mid = (start+end)//2
+    mid = (start + end) // 2
 
     # divide 를 먼저한다
     merge_sort(arr, start, mid)
-    merge_sort(arr, mid+1, end)
+    merge_sort(arr, mid + 1, end)
 
     # conquer
     merge(arr, start, mid, end)
@@ -43,5 +43,5 @@ def merge_sort(arr, start, end):
 
 if __name__ == "__main__":
     arr = [7, 2, 6, 1, 10, 9, 12, 11, 8]
-    merge_sort(arr, 0, len(arr)-1)
+    merge_sort(arr, 0, len(arr) - 1)
     print(arr)
