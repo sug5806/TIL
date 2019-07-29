@@ -122,6 +122,8 @@ if __name__ == "__main__":
     heap.push(7)
     heap.push(12)
     heap.push(3)
+    heap.push(1)
+    heap.push(18)
 
     while True:
         if not heap.is_empty():
