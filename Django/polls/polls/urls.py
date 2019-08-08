@@ -13,8 +13,7 @@ urlpatterns = [
 
     # 클래스형 뷰
     path('', IndexView.as_view(), name='index'),
-    path('<int:pk>/', Detail_View.as_view(), 'detail'),
-    path('<int:pk>/result/', ResultsView.as_view(), 'result'),
+    path('<pk>/', Detail_View.as_view(), name='detail'),
+    path('<int:pk>/result/', ResultsView.as_view(), name='result'),
     path('<int:question_id>/vote/', vote, name='vote'),
 ]
-

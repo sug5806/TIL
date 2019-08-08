@@ -31,11 +31,11 @@ def detail(request, question_id):
     return render(request, 'polls/detail.html', {'question': question})
 
 
-
 #######################################  클래스형 뷰
 
 
 class IndexView(ListView):
+    # model = Question
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
 
@@ -56,6 +56,7 @@ class ResultsView(DetailView):
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
+    print()
     try:
         selected_choice = question.choice_question.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):

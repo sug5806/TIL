@@ -20,7 +20,6 @@ class PhotoCreateSerializer(serializers.ModelSerializer):
         return author
 
 
-
 class PhotoDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo

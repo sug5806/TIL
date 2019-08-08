@@ -37,11 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sample',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -62,10 +64,21 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'sample.context_processors.translation',
+                # 전체 지원하는 언어 목록, 현재 언어 코드, 언어의 작성 방향(왼->오)
+                'django.template.context_processors.i18n',
             ],
         },
     },
 ]
+
+"""
+{
+
+
+}
+"""
+
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -107,9 +120,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -138,10 +151,19 @@ DEFAULT_FILE_STORAGE = 'config.s3media.MediaStorage'
 STATIC_URL = 'http://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
+from django.utils.translation import ugettext_lazy as _
 
+LANGUAGES = [
+    # 국가 번역에 맞춰서 하는것 아니면 앞에 것을 빼면 된다.
+    ('ko', _('Korean')),
+    ('en', _('English')),
+]
 
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
 
-
+GEOIP_PATH = os.path.join(BASE_DIR, 'geoip')
 
 
 # Static files (CSS, JavaScript, Images)

@@ -89,14 +89,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Will Learn : 멀티 데이터베이스
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'ENGINE' : 'django.db.backends.postgresql_psycopg2',
-        'NAME' : 'board',
-        'USER' : 'master',
-        'PASSWORD' : 'ghd941322',
-        'HOST' : 'board.cakloest4jdx.ap-northeast-2.rds.amazonaws.com',
-        'PORT' : '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'ENGINE' : 'django.db.backends.postgresql_psycopg2',
+        # 'NAME' : 'board',
+        # 'USER' : 'master',
+        # 'PASSWORD' : 'ghd941322',
+        # 'HOST' : 'board.cakloest4jdx.ap-northeast-2.rds.amazonaws.com',
+        # 'PORT' : '5432',
     }
 }
 

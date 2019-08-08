@@ -31,3 +31,5 @@ def get_userlist():
 
     else:
         raise ValueError('Token Error ')
+
+get_userlist()

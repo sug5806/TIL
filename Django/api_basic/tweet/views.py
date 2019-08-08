@@ -19,7 +19,6 @@ class TweetListCreateView(generics.ListCreateAPIView):
     serializer_class = ListSerializer
     search_fields = ('text', 'author__username')
 
-
     def create(self, request, *args, **kwargs):
         request.data['author'] = request.user.id
         return super().create(request, *args, **kwargs)

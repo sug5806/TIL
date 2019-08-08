@@ -2,6 +2,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
+
 # 클래스형 뷰의 이름은 자유
 from .models import Bookmark
 

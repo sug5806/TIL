@@ -29,6 +29,7 @@ class UserListView(generics.ListAPIView):
 
         return queryset
 
+
 from rest_framework.permissions import AllowAny
 
 

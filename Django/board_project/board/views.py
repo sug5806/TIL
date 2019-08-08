@@ -62,6 +62,12 @@ def search_list(request):
                   {'document_list': documents, 'board_list': boards, 'category_list' : categorys, })
 
 
+
+
+
+
+
+
 def document_list(request):
     # QuerySet
     # 1. 객체를 선택
@@ -80,7 +86,8 @@ def document_list(request):
     # 체크박스 값 가져오기
     # request.METHOD.get -> 아이템 1개
     # request.METHOD.getlist -> 리스트 형태로
-    cb_list = request.GET.getlist('cb', None)
+
+    # cb_list = request.GET.getlist('cb', None)
 
     """
     username => Q(author__username__icontains=search_key)

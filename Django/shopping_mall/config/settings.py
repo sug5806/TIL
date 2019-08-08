@@ -79,6 +79,12 @@ DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE' : '',
+        'NAME' : '',
+        'USER' : '',
+        'PASSWORD' : '',
+        'HOST' : '',
+        'PORT' : '',
 
     }
 }
@@ -115,6 +121,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# ~/.aws/credential.csv 에서 키값을 읽어온다
 
 
 AWS_STORAGE_BUCKET_NAME = 'zxcv.economy-info.site'
