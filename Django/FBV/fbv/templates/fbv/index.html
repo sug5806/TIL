@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>안녕하세요 함수형 뷰 입니다</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="이름을 입력해주세요">
+        <input type="submit" value="submit">
+    </form>
+
+    {% if name %}
+        <p>안녕하세요 {{ name }} 입니다</p>
+    {% endif %}
+</body>
+</html>
