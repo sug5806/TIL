@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for obj in objects_list %}
+    <p>{{ obj.name }} {{ obj.price }} {{ obj.seller }}</p>
+{% endfor %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="등록하기">
+</form>
+</body>
+</html>
