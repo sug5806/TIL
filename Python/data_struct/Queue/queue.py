@@ -10,8 +10,9 @@ class Queue:
 
     def empty(self):
         if self.container:
+            return False
+        else:
             return True
-        else: return False
 
     # wrapping function
     def enqueue(self, data):
@@ -21,7 +22,7 @@ class Queue:
         return self.container.pop(0)
 
     def peek(self):
-        return self.container[0]
+        return self.container[-1]
 
     def get_length(self):
         return len(self.container)
@@ -37,8 +38,7 @@ if __name__ == "__main__":
         Q.enqueue(i)
         print("{}번째 원소 :  {}".format(i, Q.peek()))
 
-    while not Q.empty():
-        print(Q.dequeue(), end="  ")
-    
+    print('*' * 100)
 
-    
+    while not Q.empty():
+        print(f'Q.dequeue() 실행: {Q.dequeue()}')

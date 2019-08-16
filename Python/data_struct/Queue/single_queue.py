@@ -1,4 +1,4 @@
-from single_linked_list import Node, SLinkedList
+from .single_linked_list import Node, SLinkedList
 
 
 class Queue:
