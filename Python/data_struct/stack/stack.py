@@ -1,6 +1,6 @@
 class Stack:
     def __init__(self):
-        self.container=list()
+        self.container = list()
 
     def empty(self):
         if not self.container:
@@ -17,8 +17,9 @@ class Stack:
     def peek(self):
         return self.container[-1]
 
-if __name__=="__main__":
-    s=Stack()
+
+if __name__ == "__main__":
+    s = Stack()
 
     s.push(1)
     s.push(2)

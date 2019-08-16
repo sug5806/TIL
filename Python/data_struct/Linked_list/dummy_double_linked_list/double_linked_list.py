@@ -1,9 +1,8 @@
 class Node:
-    def __init__(self, data = None):
+    def __init__(self, data=None):
         self.__data = data
         self.__previous = None
         self.__next = None
-
 
     def __del__(self):
         print(f"deleted data : [{self.__data}]")
@@ -33,8 +32,6 @@ class Node:
         self.__next = link
 
 
-
-
 class DoubleLinkedList:
     def __init__(self):
         # 더미의 생성시점은 DLL이 만들어 질때
@@ -58,7 +55,7 @@ class DoubleLinkedList:
     # 리스트의 맨 앞(HEAD의 오른쪽)에 데이터 추가
     def add_first(self, data):
         new_node = Node(data)
-        
+
         # new_node를 연결
         new_node.next = self.head.next
         new_node.previous = self.head
@@ -68,7 +65,7 @@ class DoubleLinkedList:
         self.head.next = new_node
 
         self.d_size += 1
-        
+
     # 리스트의 맨 뒤(TAIL의 왼쪽)에 데이터 추가
     def add_last(self, data):
         new_node = Node(data)
@@ -120,7 +117,6 @@ class DoubleLinkedList:
 
         self.d_size += 1
 
-
     # Search 계열
     def search_forward(self, target):
         temp = self.head.next
@@ -131,7 +127,6 @@ class DoubleLinkedList:
                 temp = temp.next
         return None
 
-
     def search_backward(self, target):
         temp = self.tail.previous
         while temp is not self.tail:
@@ -140,13 +135,12 @@ class DoubleLinkedList:
             else:
                 temp = temp.previous
         return None
-        
 
     # Delete 계열
     def delete_first(self):
         if self.empty():
             print("connected Node is nothing")
-            return 
+            return
         self.head.next = self.head.next.next
         self.head.next.previous = self.head
 
@@ -155,7 +149,7 @@ class DoubleLinkedList:
     def delete_last(self):
         if self.empty():
             print("nothing connected Node")
-            return 
+            return
         self.tail.previous = self.tail.previous.previous
         self.tail.previous.next = self.tail
 
@@ -170,49 +164,41 @@ class DoubleLinkedList:
 
         self.d_size -= 1
 
-
-
     # 편의 함수 - gennerator
     def traverse(self, start=True):
         # 리스트의 첫 데이터부터 순회!
         if start:
-            temp = self.head.next    
+            temp = self.head.next
             while temp is not self.tail:
                 yield temp
                 temp = temp.next
-        else: 
+        else:
             # 리스트의 마지막 데이터부터 순회!
             temp = self.tail.previous
             while temp is not self.head:
                 yield temp
                 temp = temp.previous
 
+
 def show_list(d_list):
     g = d_list.traverse()
     for node in g:
         print(node.data, end=" ")
-    print()          
+    print()
+
 
 if __name__ == "__main__":
     dll1 = DoubleLinkedList()
-    # dll2 = DoubleLinkedList()
+
     dll1.add_last(1)
     dll1.add_last(3)
     dll1.add_last(5)
     dll1.add_last(7)
     dll1.add_last(9)
-    
-    # print()
 
-    # dll2.add_last(1)
-    # dll2.add_last(3)
-    # dll2.add_last(5)
-    # dll2.add_last(7)
-    # dll2.add_last(9)
-    # show_list(dll2)
-
-    dll1.insert_after(4,dll1.search_forward(3))
-    dll1.insert_before(2,dll1.search_forward(3))
+    dll1.insert_after(4, dll1.search_forward(3))
+    dll1.insert_before(2, dll1.search_forward(3))
+    dll1.insert_before(10, dll1.search_forward(4))
 
     show_list(dll1)
     # 얘가 4를 가리키고 있으므로 None으로 해주지 않으면 delete 메시지가 뜨지 않음
@@ -221,8 +207,7 @@ if __name__ == "__main__":
         print(f"searched data : {searched_data.data}")
     else:
         print("there is no data")
-    
-    
+
     dll1.delete_first()
     dll1.delete_last()
     dll1.delete_last()
@@ -231,7 +216,4 @@ if __name__ == "__main__":
     searched_data = None
     show_list(dll1)
 
-    print("*"*100)
-
-
-
+    print("*" * 100)

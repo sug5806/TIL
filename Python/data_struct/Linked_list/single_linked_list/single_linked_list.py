@@ -1,19 +1,17 @@
 class Node:
-    def __init__(self, data = None):
+    def __init__(self, data=None):
         self.__data = data
         self.__link = None
-    
+
     # 소멸자
     # 객체가 사라지기 전에
     # 반드시 한번 호출 하는것을 보장한다
     def __del__(self):
         print(f"node[{self.__data}] deleted!! ")
 
-
     @property
     def data(self):
         return self.__data
-
 
     @data.setter
     def data(self, data):
@@ -30,9 +28,9 @@ class Node:
 
 class SLinkedList:
     def __init__(self):
-        self.head=None
-        self.d_size=0
-    
+        self.head = None
+        self.d_size = 0
+
     def empty(self):
         if self.d_size == 0:
             return True
@@ -41,7 +39,7 @@ class SLinkedList:
 
     def size(self):
         return self.d_size
-    
+
     def add(self, data):
         new_node = Node(data)
         new_node.link = self.head
@@ -53,15 +51,14 @@ class SLinkedList:
         while temp:
             if temp.data == target:
                 return temp.data
-            else : 
+            else:
                 temp = temp.link
-        return temp 
-        
+        return temp
 
     def delete(self):
-        if self.head == None:
+        if self.head is None:
             return
-        
+
         else:
             self.head = self.head.link
             self.d_size -= 1
@@ -70,8 +67,9 @@ class SLinkedList:
 def show_list(sll):
     cur = sll.head
     for _ in range(sll.size()):
-        print(cur.data, end= "  ")
+        print(cur.data, end="  ")
         cur = cur.link
+
 
 if __name__ == "__main__":
     SLL = SLinkedList()
@@ -91,6 +89,5 @@ if __name__ == "__main__":
         print(f'searched data : {result}')
     else:
         print(f'there is no such data')
-
 
     print()
