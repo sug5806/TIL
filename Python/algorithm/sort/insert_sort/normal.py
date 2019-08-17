@@ -8,7 +8,8 @@ def ins_sort(a):
             j -= 1
         a[j + 1] = key
         print(a)
-    
+
+
 d = [2, 4, 5, 1, 3]
 ins_sort(d)
 print(d)
