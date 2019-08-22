@@ -4,15 +4,13 @@
 def insertion_sort(arr):
     n = len(arr)
     for i in range(1, n):
-        temp = arr[i]
-        j = i - 1
-        while j != -1:
-            if arr[j] > temp:
-                arr[j + 1] = arr[j]
-                j -= 1
-            else:
-                break
-        arr[j + 1] = temp
+        value = arr[i]
+        idx = i - 1
+        while idx >= 0 and arr[idx] > value:
+            arr[idx + 1] = arr[idx]
+            idx -= 1
+        arr[idx + 1] = value
+        print(arr)
 
 
 if __name__ == "__main__":

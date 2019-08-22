@@ -1,47 +1,43 @@
-# 특정 케이스를 만들고 그것에 대해 알고리즘을 만들어서 푼다
-
-def merge(arr, start, mid, end):
-    left = start
-    right = mid + 1
-    li = []
-
-    while left <= mid and right <= end:
-        if arr[left] <= arr[right]:
-            li.append(arr[left])
-            left += 1
-        else:
-            li.append(arr[right])
-            right += 1
-
-    # 만약 right가 남아있다면
-    while right <= end:
-        li.append(arr[right])
-        right += 1
-
-    # 만약 left가 남아있다면
-    while left <= mid:
-        li.append(arr[left])
-        left += 1
-
-    arr[start:end + 1] = li
-
-
-def merge_sort(arr, start, end):
-    # base case
-    if start >= end:
+def merge_sort(li):
+    n = len(li)
+    if n <= 1:
         return
 
-    mid = (start + end) // 2
+    mid = n // 2
 
-    # divide 를 먼저한다
-    merge_sort(arr, start, mid)
-    merge_sort(arr, mid + 1, end)
+    sub_li1 = li[:mid]
+    sub_li2 = li[mid:]
+    merge_sort(sub_li1)
+    merge_sort(sub_li2)
 
-    # conquer
-    merge(arr, start, mid, end)
+    idx_li1 = 0
+    idx_li2 = 0
+    idx_ori_li = 0
+
+    while idx_li1 < len(sub_li1) and idx_li2 < len(sub_li2):
+        if sub_li1[idx_li1] <= sub_li2[idx_li2]:
+            li[idx_ori_li] = sub_li1[idx_li1]
+            idx_li1 += 1
+            idx_ori_li += 1
+
+        else:
+            li[idx_ori_li] = sub_li2[idx_li2]
+            idx_li2 += 1
+            idx_ori_li += 1
+
+    while idx_li1 < len(sub_li1):
+        li[idx_ori_li] = sub_li1[idx_li1]
+        idx_ori_li += 1
+        idx_li1 += 1
+
+    while idx_li2 < len(sub_li2):
+        li[idx_ori_li] = sub_li2[idx_li2]
+        idx_li2 += 1
+        idx_ori_li += 1
 
 
 if __name__ == "__main__":
-    arr = [7, 2, 6, 1, 10, 9, 12, 11, 8]
-    merge_sort(arr, 0, len(arr) - 1)
-    print(arr)
+    # li = [1, 4, 2, 10, 9]
+    li = [1, 5, 2, 74, 25, 22, 17, 9, 3, 67, 98, 33, 21, 6]
+    merge_sort(li)
+    print(f'정렬 완료후 리스트: {li}')
