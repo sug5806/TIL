@@ -1,6 +1,7 @@
 from LL_Queue import LQueue
 from lstack import LStack
 
+
 class TreeNode:
     def __init__(self, data):
         self.__data = data
@@ -14,7 +15,7 @@ class TreeNode:
     @data.setter
     def data(self, data):
         self.__data = data
-    
+
     @property
     def left(self):
         return self.__left
@@ -26,6 +27,7 @@ class TreeNode:
     @property
     def right(self):
         return self.__right
+
     @right.setter
     def right(self, right):
         self.__right = right
@@ -36,7 +38,7 @@ def preorder(cur):
     # base case
     if cur is None:
         return
-    
+
     # 방문 : 데이터 출력
     # cur 방문
     print(cur.data, end="  ")
@@ -62,8 +64,9 @@ def postorder(cur):
     postorder(cur.right)
     print(cur.data, end="  ")
 
+
 def iter_preorder(cur):
-    stack=LStack()
+    stack = LStack()
 
     # while True:
     #     while cur:
@@ -88,7 +91,7 @@ def iter_preorder(cur):
 
 
 def iter_inorder(cur):
-    stack=LStack()
+    stack = LStack()
 
     while True:
         while cur:
@@ -106,30 +109,30 @@ def iter_inorder(cur):
 def iter_postorder(cur):
     stack1 = LStack()
     stack2 = LStack()
-    
+
     stack1.push(cur)
 
     # stack1이 비어있으면 종료
     while not stack1.empty():
-        cur=stack1.pop
+        cur = stack1.pop
         stack2.push(cur)
 
         if cur.left:
             stack1.push(cur.left)
-        
+
         if cur.right:
             stack1.push(cur.right)
 
     while not stack2.empty():
-        cur=stack2.pop
+        cur = stack2.pop
         print(cur.data, end='  ')
 
 
 def levelorder(cur):
-    queue=LQueue()
+    queue = LQueue()
     queue.enqueue(cur)
     while not queue.empty():
-        cur=queue.dequeue()
+        cur = queue.dequeue()
         print(cur.data, end='  ')
         if cur.left:
             queue.enqueue(cur.left)
@@ -147,9 +150,12 @@ if __name__ == "__main__":
     n6 = TreeNode(6)
     n7 = TreeNode(7)
 
-    n1.left = n2; n1.right = n3
-    n2.left = n4; n2.right = n5
-    n3.left = n6; n3.right = n7
+    n1.left = n2
+    n1.right = n3
+    n2.left = n4
+    n2.right = n5
+    n3.left = n6
+    n3.right = n7
 
     preorder(n1)
     print()
@@ -168,4 +174,3 @@ if __name__ == "__main__":
 
     levelorder(n1)
     print()
-
