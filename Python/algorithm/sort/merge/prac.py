@@ -1,43 +1,48 @@
-def merge_sort(li):
-    n = len(li)
-    if n <= 1:
+def merge_sort(a):
+    length = len(a)
+    # print(a)
+    if length <= 1:
         return
 
-    mid = n // 2
-
-    sub_li1 = li[:mid]
-    sub_li2 = li[mid:]
+    mid = length // 2
+    sub_li1 = a[mid:]
+    sub_li2 = a[:mid]
     merge_sort(sub_li1)
     merge_sort(sub_li2)
 
-    idx_li1 = 0
-    idx_li2 = 0
-    idx_ori_li = 0
+    g1_idx = 0
+    g2_idx = 0
+    ori_idx = 0
 
-    while idx_li1 < len(sub_li1) and idx_li2 < len(sub_li2):
-        if sub_li1[idx_li1] <= sub_li2[idx_li2]:
-            li[idx_ori_li] = sub_li1[idx_li1]
-            idx_li1 += 1
-            idx_ori_li += 1
+    g1_len = len(sub_li1)
+    g2_len = len(sub_li2)
+
+    while g1_idx < g1_len and g2_idx < g2_len:
+        if sub_li1[g1_idx] < sub_li2[g2_idx]:
+            a[ori_idx] = sub_li1[g1_idx]
+            ori_idx += 1
+            g1_idx += 1
 
         else:
-            li[idx_ori_li] = sub_li2[idx_li2]
-            idx_li2 += 1
-            idx_ori_li += 1
+            a[ori_idx] = sub_li2[g2_idx]
+            ori_idx += 1
+            g2_idx += 1
 
-    while idx_li1 < len(sub_li1):
-        li[idx_ori_li] = sub_li1[idx_li1]
-        idx_ori_li += 1
-        idx_li1 += 1
+    while g1_idx < g1_len:
+        a[ori_idx] = sub_li1[g1_idx]
+        ori_idx += 1
+        g1_idx += 1
 
-    while idx_li2 < len(sub_li2):
-        li[idx_ori_li] = sub_li2[idx_li2]
-        idx_li2 += 1
-        idx_ori_li += 1
+    while g2_idx < g2_len:
+        a[ori_idx] = sub_li2[g2_idx]
+        ori_idx += 1
+        g2_idx += 1
+
+    print(a)
 
 
 if __name__ == "__main__":
-    # li = [1, 4, 2, 10, 9]
-    li = [1, 5, 2, 74, 25, 22, 17, 9, 3, 67, 98, 33, 21, 6]
-    merge_sort(li)
-    print(f'정렬 완료후 리스트: {li}')
+    # d = [6, 8, 3, 9, 10, 1, 2, 4, 7, 5]
+    d = [5, 1, 3, 2, 7]
+    merge_sort(d)
+    print(d)
