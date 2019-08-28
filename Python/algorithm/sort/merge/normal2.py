@@ -1,5 +1,6 @@
 # 특정 케이스를 만들고 그것에 대해 알고리즘을 만들어서 푼다
 
+
 def merge(arr, start, mid, end):
     left = start
     right = mid + 1

@@ -31,6 +31,6 @@ def merge_sort(a):
 
 
 if __name__ == "__main__":
-    d = [6, 8, 3, 9, 10, 1, 2, 4, 7, 5]
-    merge_sort(d)
-    print(d)
+    arr = [1, 5, 2, 74, 25, 22, 17, 9, 3, 67, 98, 33, 21, 6]
+    merge_sort(arr)
+    print(arr)
