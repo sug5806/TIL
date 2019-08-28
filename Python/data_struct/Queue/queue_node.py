@@ -10,14 +10,17 @@ class Queue:
         self.tail = None
 
     def is_empty(self):
-        if self.head is None:
+        if self.head is None and self.tail is None:
             return True
         else:
             return False
 
+    def peek(self):
+        ret_data = self.head.data
+        return ret_data
+
     def enqueue(self, data):
         new_node = Node(data)
-
         if self.is_empty():
             self.head = new_node
             self.tail = new_node
@@ -29,13 +32,9 @@ class Queue:
     def dequeue(self):
         if self.is_empty():
             return None
-
         ret_data = self.head.data
         self.head = self.head.next
         return ret_data
-
-    def peek(self):
-        return self.head.data
 
 
 if __name__ == "__main__":
