@@ -62,6 +62,18 @@ class SingleLinkedList:
         self.d_size -= 1
         return ret_data
 
+    def delete_target(self, target):
+        cur = self.head
+        previous = self.head
+        while cur:
+            if cur.data == target:
+                previous.next = cur.next
+                return
+            else:
+                previous = cur
+                cur = cur.next
+        return None
+
     def search(self, target):
         cur = self.head
 
@@ -93,6 +105,7 @@ if __name__ == "__main__":
     # SLL.add(5)
     # SLL.add(7)
     # SLL.add(9)
+    SLL.delete_target(3)
     show_list(SLL)
     print()
     print('*' * 100)
