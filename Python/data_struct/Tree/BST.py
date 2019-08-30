@@ -32,7 +32,7 @@ class TreeNode:
         self.__right = right
 
 
-class BST():
+class BST:
     def __init__(self):
         self.root = None
 

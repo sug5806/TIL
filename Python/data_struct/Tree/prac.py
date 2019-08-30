@@ -1,5 +1,6 @@
 # traversal (순회)
 # 재방문 없이 어떤 자료구조의 모든 데이터(노드) 방문하는 것
+from queue import Queue
 
 
 class TreeNode:
@@ -9,51 +10,36 @@ class TreeNode:
         self.right_child = None
 
 
-def pre_order(node):
-    # base case
-    if not node:
+def pre_order(tree_node):
+    if tree_node is None:
         return
 
-    # 방문
-    print(node.data, end=' ')
-    # 왼쪽 자식
-    pre_order(node.left_child)
-    # 오른쪽 자식
-    pre_order(node.right_child)
+    print(tree_node.data, end=' ')
+    pre_order(tree_node.left_child)
+    pre_order(tree_node.right_child)
 
 
-def in_order(node):
-    # base case
-    if not node:
+def in_order(tree_node):
+    if tree_node is None:
         return
 
-    # 왼쪽 자식
-    in_order(node.left_child)
-    # 방문
-    print(node.data, end=' ')
-    # 오른쪽 자식
-    in_order(node.right_child)
+    in_order(tree_node.left_child)
+    print(tree_node.data, end=' ')
+    in_order(tree_node.right_child)
 
 
-def post_order(node):
-    # base case
-    if not node:
+def post_order(tree_node):
+    if tree_node is None:
         return
 
-    # 왼쪽 자식
-    post_order(node.left_child)
-
-    # 오른쪽 자식
-    post_order(node.right_child)
-
-    # 방문
-    print(node.data, end=' ')
+    post_order(tree_node.left_child)
+    post_order(tree_node.right_child)
+    print(tree_node.data, end=' ')
 
 
 class Stack:
-    def __init__(self, data):
+    def __init__(self):
         self.container = list()
-        self.data = data
 
     def is_empty(self):
         if not self.container:
@@ -74,11 +60,11 @@ class Stack:
 
 
 def iter_preorder(cur):
-    s = Stack(cur)
+    s = Stack()
 
     while True:
         while cur:
-            print(cur.data, end="  ")
+            print(cur.data, end=" ")
             s.push(cur)
             cur = cur.left_child
         if s.is_empty():
@@ -89,7 +75,7 @@ def iter_preorder(cur):
 
 
 def iter_inorder(cur):
-    s = Stack(cur)
+    s = Stack()
 
     while True:
         while cur:
@@ -98,7 +84,7 @@ def iter_inorder(cur):
         if s.is_empty():
             break
         cur = s.pop()
-        print(cur.data, end="  ")
+        print(cur.data, end=" ")
         cur = cur.right_child
 
 
@@ -113,14 +99,11 @@ def iter_postorder(cur):
             s1.push(cur.left_child)
         if cur.right:
             s1.push(cur.right_child)
-        s2.push(cur)
+        s2.push(cur.data)
 
     while not s2.is_empty():
         cur = s2.pop()
-        print(cur.data, end="  ")
-
-
-from queue import Queue
+        print(cur.data, end=" ")
 
 
 def level_order(cur):
@@ -128,12 +111,13 @@ def level_order(cur):
 
     q.put(cur)
     while not q.empty():
-        cur=q.get()
-        print(cur.date, end="  ")
+        cur = q.get()
+        print(cur.date, end=" ")
         if cur.left_child:
             q.put(cur.left_child)
         if cur.right_child:
             q.put(cur.right_child)
+
 
 if __name__ == '__main__':
     n1 = TreeNode(1)
@@ -151,15 +135,19 @@ if __name__ == '__main__':
     n3.left_child = n6
     n3.right_child = n7
 
+    print(f'전위 순회 재귀: ', end="")
     pre_order(n1)
     print()
+    print(f'중위 순회 재귀: ', end='')
     in_order(n1)
     print()
+    print(f'후위 순회 재귀: ', end='')
     post_order(n1)
     print()
     print()
+    print(f'전위 순회 반복: ', end='')
     iter_preorder(n1)
     print()
-    iter_inorder(n1)
+    # iter_inorder(n1)
     print()
-    iter_postorder(n1)
+    # iter_postorder(n1)
