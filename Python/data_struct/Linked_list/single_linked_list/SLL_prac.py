@@ -10,7 +10,7 @@ class SingleLinkedList:
         self.tail = None
         self.d_size = 0
 
-    def is_empty(self):
+    def empty(self):
         if self.d_size == 0:
             return True
         else:
@@ -21,7 +21,7 @@ class SingleLinkedList:
 
     def first(self, data):
         new_node = Node(data)
-        if self.is_empty():
+        if self.empty():
             self.head = new_node
             self.tail = new_node
             self.d_size += 1
@@ -33,7 +33,7 @@ class SingleLinkedList:
 
     def append(self, data):
         new_node = Node(data)
-        if self.is_empty():
+        if self.empty():
             self.head = new_node
             self.tail = new_node
             self.d_size += 1
@@ -43,45 +43,28 @@ class SingleLinkedList:
         self.tail = new_node
         self.d_size += 1
 
-    def add(self, data):
-        new_node = Node(data)
-        # if self.is_empty():
-        #     self.head = new_node
-        #     return
-
-        new_node.next = self.head
-        self.head = new_node
-        self.d_size += 1
-
-    def delete(self):
-        if self.is_empty():
-            return None
-
-        ret_data = self.head.data
+    def delete_first(self):
         self.head = self.head.next
         self.d_size -= 1
-        return ret_data
 
     def delete_target(self, target):
         cur = self.head
-        previous = self.head
+        pre = self.head
         while cur:
             if cur.data == target:
-                previous.next = cur.next
+                pre.next = cur.next
+                self.d_size -= 1
                 return
-            else:
-                previous = cur
-                cur = cur.next
+            pre = cur
+            cur = cur.next
         return None
 
     def search(self, target):
         cur = self.head
-
         while cur:
-            if cur.data == target:
-                return target
-            else:
-                cur = cur.next
+            if target == cur.data:
+                return cur.data
+            cur = cur.next
 
         return None
 
@@ -89,7 +72,9 @@ class SingleLinkedList:
 def show_list(sll):
     cur = sll.head
     while cur:
-        print(f'{cur.data}', end=' ')
+        if cur is None:
+            return None
+        print(cur.data)
         cur = cur.next
 
 
@@ -100,20 +85,25 @@ if __name__ == "__main__":
     SLL.first(4)
     SLL.first(5)
     SLL.append(8)
+
     # SLL.add(1)
     # SLL.add(3)
     # SLL.add(5)
     # SLL.add(7)
     # SLL.add(9)
-    SLL.delete_target(3)
-    show_list(SLL)
+
+    show_list(sll=SLL)
     print()
     print('*' * 100)
 
-    target = 2
+    target = 3
     result = SLL.search(target)
     if result:
         print(f'target = {target}')
         print(f'searched data : {result}')
     else:
         print(f'there is no such data')
+
+    print()
+    SLL.delete_target(3)
+    show_list(sll=SLL)
