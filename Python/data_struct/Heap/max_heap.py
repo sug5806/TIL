@@ -88,7 +88,8 @@ class MaxHeap:
             while cur > 1:
                 parent_cur = self.__get_parent_index(cur)
                 if key > self.__container[parent_cur]:
-                    self.__container[cur], self.__container[parent_cur] = self.__container[parent_cur], self.__container[cur]
+                    self.__container[cur], self.__container[parent_cur] = self.__container[parent_cur], \
+                                                                          self.__container[cur]
                     cur = parent_cur
                 else:
                     return
