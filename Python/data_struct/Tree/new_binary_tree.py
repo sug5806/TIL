@@ -14,34 +14,6 @@ class Node:
         self.data = data
         self.next = None
 
-# 전위 순회
-def pre_order(tree_node):
-    if tree_node is None:
-        return
-
-    print(tree_node.data, end=" ")
-    pre_order(tree_node.left_child)
-    pre_order(tree_node.right_child)
-
-
-# 중위 순회
-def in_order(tree_node):
-    if tree_node is None:
-        return
-
-    in_order(tree_node.left_child)
-    print(tree_node.data, end=" ")
-    in_order(tree_node.right_child)
-
-# 후위 순회
-def post_order(tree_node):
-    if tree_node is None:
-        return
-
-    post_order(tree_node.left_child)
-    post_order(tree_node.right_child)
-    print(tree_node.data, end=" ")
-
 
 class Stack:
     def __init__(self):
@@ -94,14 +66,44 @@ class Queue:
         return ret_node
 
 
+# 전위 순회
+def pre_order(tree_node):
+    if tree_node is None:
+        return
+
+    print(tree_node.data, end=" ")
+    pre_order(tree_node.left_child)
+    pre_order(tree_node.right_child)
+
+
+# 중위 순회
+def in_order(tree_node):
+    if tree_node is None:
+        return
+
+    in_order(tree_node.left_child)
+    print(tree_node.data, end=" ")
+    in_order(tree_node.right_child)
+
+
+# 후위 순회
+def post_order(tree_node):
+    if tree_node is None:
+        return
+
+    post_order(tree_node.left_child)
+    post_order(tree_node.right_child)
+    print(tree_node.data, end=" ")
+
+
 # 전위 순회 반복문
 def iter_pre_order(cur):
     s = Stack()
 
     while True:
         while cur:
-            print(cur.data, end=" ")
             s.push(cur)
+            print(cur.data, end=" ")
             cur = cur.left_child
 
         if s.is_empty():
@@ -113,18 +115,18 @@ def iter_pre_order(cur):
 
 # 중위 순회 반복문
 def iter_in_order(cur):
-    s = Stack()
+    stack = Stack()
 
     while True:
         while cur:
-            s.push(cur)
+            stack.push(cur)
             cur = cur.left_child
 
-        if s.is_empty():
+        if stack.is_empty():
             break
 
-        cur = s.pop()
-        print(cur.data, end=' ')
+        cur = stack.pop()
+        print(cur.data, end=" ")
         cur = cur.right_child
 
 
@@ -137,8 +139,8 @@ def iter_post_order(cur):
 
     while not stack1.is_empty():
         cur = stack1.pop()
-        stack2.push(cur)
 
+        stack2.push(cur)
         if cur.left_child:
             stack1.push(cur.left_child)
 
