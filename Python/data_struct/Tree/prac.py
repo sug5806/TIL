@@ -1,6 +1,5 @@
 # traversal (순회)
 # 재방문 없이 어떤 자료구조의 모든 데이터(노드) 방문하는 것
-from queue import Queue
 
 
 class TreeNode:
@@ -10,11 +9,17 @@ class TreeNode:
         self.right_child = None
 
 
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+
 def pre_order(tree_node):
     if tree_node is None:
         return
 
-    print(tree_node.data, end=' ')
+    print(tree_node.data, end=" ")
     pre_order(tree_node.left_child)
     pre_order(tree_node.right_child)
 
@@ -24,7 +29,7 @@ def in_order(tree_node):
         return
 
     in_order(tree_node.left_child)
-    print(tree_node.data, end=' ')
+    print(tree_node.data, end=" ")
     in_order(tree_node.right_child)
 
 
@@ -34,7 +39,7 @@ def post_order(tree_node):
 
     post_order(tree_node.left_child)
     post_order(tree_node.right_child)
-    print(tree_node.data, end=' ')
+    print(tree_node.data, end=" ")
 
 
 class Stack:
@@ -44,7 +49,6 @@ class Stack:
     def is_empty(self):
         if not self.container:
             return True
-
         else:
             return False
 
@@ -59,7 +63,37 @@ class Stack:
         return self.container[-1]
 
 
-def iter_preorder(cur):
+class Queue:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def is_empty(self):
+        if self.head is None:
+            return True
+        else:
+            return False
+
+    def enqueue(self, tree_node):
+        new_node = Node(tree_node)
+        if self.is_empty():
+            self.head = new_node
+            self.tail = new_node
+            return
+
+        self.tail.next = new_node
+        self.tail = new_node
+
+    def dequeue(self):
+        if self.is_empty():
+            return None
+
+        ret_node = self.head.data
+        self.head = self.head.next
+        return ret_node
+
+
+def iter_pre_order(cur):
     s = Stack()
 
     while True:
@@ -67,6 +101,7 @@ def iter_preorder(cur):
             print(cur.data, end=" ")
             s.push(cur)
             cur = cur.left_child
+
         if s.is_empty():
             break
 
@@ -74,49 +109,57 @@ def iter_preorder(cur):
         cur = cur.right_child
 
 
-def iter_inorder(cur):
+def iter_in_order(cur):
     s = Stack()
 
     while True:
         while cur:
             s.push(cur)
             cur = cur.left_child
+
         if s.is_empty():
             break
+
         cur = s.pop()
-        print(cur.data, end=" ")
+        print(cur.data, end=' ')
         cur = cur.right_child
 
 
-def iter_postorder(cur):
-    s1 = Stack()
-    s2 = Stack()
+def iter_post_order(cur):
+    stack1 = Stack()
+    stack2 = Stack()
 
-    s1.push(cur)
-    while not s1.is_empty():
-        cur = s1.pop()
-        if cur.left:
-            s1.push(cur.left_child)
-        if cur.right:
-            s1.push(cur.right_child)
-        s2.push(cur.data)
+    stack1.push(cur)
 
-    while not s2.is_empty():
-        cur = s2.pop()
+    while not stack1.is_empty():
+        cur = stack1.pop()
+        stack2.push(cur)
+
+        if cur.left_child:
+            stack1.push(cur.left_child)
+
+        if cur.right_child:
+            stack1.push(cur.right_child)
+
+    while not stack2.is_empty():
+        cur = stack2.pop()
         print(cur.data, end=" ")
 
 
 def level_order(cur):
     q = Queue()
 
-    q.put(cur)
-    while not q.empty():
-        cur = q.get()
-        print(cur.date, end=" ")
+    q.enqueue(cur)
+
+    while not q.is_empty():
+        cur = q.dequeue()
+
+        print(cur.data, end=" ")
         if cur.left_child:
-            q.put(cur.left_child)
+            q.enqueue(cur.left_child)
+
         if cur.right_child:
-            q.put(cur.right_child)
+            q.enqueue(cur.right_child)
 
 
 if __name__ == '__main__':
@@ -146,8 +189,14 @@ if __name__ == '__main__':
     print()
     print()
     print(f'전위 순회 반복: ', end='')
-    iter_preorder(n1)
+    iter_pre_order(n1)
     print()
-    # iter_inorder(n1)
+    print(f'중위 순회 반복: ', end='')
+    iter_in_order(n1)
     print()
-    # iter_postorder(n1)
+    print(f'후위 순회 반복: ', end='')
+    iter_post_order(n1)
+    print()
+    print(f'레벨 순회 반복: ', end='')
+    level_order(n1)
+    print()
