@@ -7,10 +7,10 @@ def insertion_sort(arr):
     for i in range(1, length):
         data = arr[i]
         j = i - 1
-        while j >= 0 and arr[j] > data:
+        while j >= 0 and data < arr[j]:
             arr[j + 1] = arr[j]
             j -= 1
-        arr[j+1] = data
+        arr[j + 1] = data
 
 
 if __name__ == "__main__":

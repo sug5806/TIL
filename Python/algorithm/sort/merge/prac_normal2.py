@@ -5,9 +5,10 @@ def merge(arr, start, mid, end):
     merged = list()
 
     while left <= mid and right <= end:
-        if arr[left] < arr[right]:
+        if arr[left] <= arr[right]:
             merged.append(arr[left])
             left += 1
+
         else:
             merged.append(arr[right])
             right += 1
@@ -21,6 +22,7 @@ def merge(arr, start, mid, end):
         right += 1
 
     arr[start:end+1] = merged
+
 
 def merge_sort(arr, start, end):
     if start >= end:
