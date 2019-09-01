@@ -12,21 +12,21 @@ MAX_Heap(데이터의 값이 가장 큰게 우선순위가 높다)
 
 HEAP property
  1. 완전 이진트리인가?
- 2. 어떤 노드를 선택해도 키값이 자식보다 크거나 같아야한
+ 2. 어떤 노드를 선택해도 키값이 자식보다 크거나 같아야한다
 """
 
 
-class Element:
-    def __init__(self, key):
-        self.__key = key
-
-    @property
-    def key(self):
-        return self.__key
-
-    @key.setter
-    def key(self, k):
-        self.__key = k
+# class Element:
+#     def __init__(self, key):
+#         self.__key = key
+#
+#     @property
+#     def key(self):
+#         return self.__key
+#
+#     @key.setter
+#     def key(self, k):
+#         self.__key = k
 
 
 class MaxHeap:
@@ -88,9 +88,9 @@ class MaxHeap:
             while cur > 1:
                 parent_cur = self.__get_parent_index(cur)
                 if key > self.__container[parent_cur]:
-                    self.__container[cur], self.__container[parent_cur] = self.__container[parent_cur], \
-                                                                          self.__container[cur]
-                    cur = parent_cur
+                    self.__container[cur], self.__container[parent_cur] = \
+                        self.__container[parent_cur], self.__container[cur]
+                    # cur = parent_cur
                 else:
                     return
 
