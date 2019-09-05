@@ -93,6 +93,7 @@ if __name__ == "__main__":
 
     for _ in range(9):
         ret_data = heap.delete()
-        # print(f'삭제한 데이터: {ret_data}')
+        print(f'삭제한 데이터: {ret_data}')
+        print(f'삭제후 : ', end="")
         heap.show_heap()
-        # print()
+        print()
