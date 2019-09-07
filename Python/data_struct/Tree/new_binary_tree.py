@@ -112,6 +112,18 @@ def iter_pre_order(cur):
         cur = s.pop()
         cur = cur.right_child
 
+    while True:
+        while cur:
+            s.push(cur)
+            print(cur.data, end=" ")
+            cur = cur.left_child
+
+        if not s.is_empty():
+            break
+        cur = cur.pop()
+
+        cur = cur.right_child
+
 
 # 중위 순회 반복문
 def iter_in_order(cur):
