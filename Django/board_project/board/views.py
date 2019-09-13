@@ -2,7 +2,6 @@ import math
 
 # 로그인을 하지 않으면 글쓰기 불가
 from django.contrib.auth.decorators import login_required
-
 # Filter를
 from django.db.models import Q
 from django.db.models.signals import pre_save
@@ -15,9 +14,9 @@ from django.urls import reverse
 from django.utils.text import slugify
 
 from .forms import DocumentForm
-from .models import Document
-from .models import Category
 from .models import Board
+from .models import Category
+from .models import Document
 
 
 # QuerySet은 모델의 디폴트 매니저를 통해 실행한다.
@@ -59,13 +58,7 @@ def search_list(request):
     # documents = documents[start_index:end_index]
 
     return render(request, 'board/search_list.html',
-                  {'document_list': documents, 'board_list': boards, 'category_list' : categorys, })
-
-
-
-
-
-
+                  {'document_list': documents, 'board_list': boards, 'category_list': categorys, })
 
 
 def document_list(request):
@@ -79,7 +72,7 @@ def document_list(request):
     page = int(request.GET.get('page', 1))
     # 페이징 기능을 구현한다.
     # 페이지당 갯수
-    paginated_by = 5
+    paginated_by = 1
 
     ##############################################################################
 
@@ -156,7 +149,6 @@ def document_list(request):
     end_index = paginated_by * page
     documents = documents[start_index:end_index]
 
-
     # html = render_to_string('board/document_list.html', {'object_list':documents, 'range': range(1, math.ceil(total_count / paginated_by) + 1)})
     # return JsonResponse({'html': html})
 
@@ -189,9 +181,6 @@ def document_list(request):
     Q() & Q() : and
     ~Q() : not
     """
-
-
-
 
     """
     2019-05-15 수업
@@ -248,10 +237,6 @@ def document_create(request):
         # 입력 창을 보여줌
         form = DocumentForm()
     return render(request, 'board/document_create.html', {'form': form})
-
-
-
-
 @receiver(pre_save, sender=Document)
 def pre_save(sender, instance, **kwargs):
     # create할때 슬러그를 적지않으니 공백으로 입력되어
@@ -287,6 +272,8 @@ def document_update(request, document_id):
 
 from .forms import CommentForm
 from django.template.loader import render_to_string
+
+
 # Todo 댓글기능 따로 만들기
 def comment_create(request, document_id):
     # ajax 기능에 의해 호출된 것인지 구분하기 위한 값
@@ -297,7 +284,7 @@ def comment_create(request, document_id):
     comment_form.instance.author_id = request.user.id
     comment_form.instance.document_id = document_id
     if comment_form.is_valid():
-       comment = comment_form.save()
+        comment = comment_form.save()
 
     # 만약 ajax에 의해 호출되었다면 redirection없이 Json 형태로 응답
     if is_ajax:
@@ -351,8 +338,10 @@ def dispatch(self, request, *args, **kwargs):
 from django.contrib import messages
 from .models import Comment
 
+
 def comment_update(request, comment_id):
-    is_ajax, data = (request.POST.get('is_ajax'), request.GET) if 'is_ajax' in request.GET else (request.POST.get('is_ajax', False), request.POST)
+    is_ajax, data = (request.POST.get('is_ajax'), request.GET) if 'is_ajax' in request.GET else (
+    request.POST.get('is_ajax', False), request.POST)
 
     # Comment모델에서 comment_id에 해당하는 레코드를 전부 가져온다
     comment = get_object_or_404(Comment, pk=comment_id)
@@ -370,7 +359,6 @@ def comment_update(request, comment_id):
             form.save()
             return JsonResponse({'works': True})
 
-
     if request.method == "POST":
         form = CommentForm(request.POST, instance=comment)
         if form.is_valid():
@@ -381,18 +369,16 @@ def comment_update(request, comment_id):
     return render(request, 'board/comment_update.html', {'form': form})
 
 
-
 ###################################################################################
 
 def comment_delete(request, comment_id):
-
     is_ajax = request.GET.get('is_ajax') if 'is_ajax' in request.GET else request.POST.get('is_ajax', False)
 
     comment = get_object_or_404(Comment, pk=comment_id)
     document = get_object_or_404(Document, pk=comment.document.id)
 
-# user.is_staff
-# user.is_superuser
+    # user.is_staff
+    # user.is_superuser
 
     if request.user != comment.author and not request.user.is_staff and request.user != document.author:
         messages.warning(request, "권한 없음")
@@ -413,7 +399,7 @@ def document_detail(request, document_id):
     # 레코드 1개 가져오기
     # document_id를 하면 없다고 뜨니 매개변수로 document_id를 받는다
     # urls 파일에 가서 document_id를 넘겨준다
-    #document = Document.objects.get(pk=document_id)
+    # document = Document.objects.get(pk=document_id)
     document = get_object_or_404(Document, pk=document_id)
 
     # 만약 post일 때만 댓글 입력에 관한 처리를 더한다.
@@ -430,10 +416,11 @@ def document_detail(request, document_id):
     return render(request, 'board/document_detail.html',
                   {
                       'object': document,
-                      'comments' : comments,
-                      'comment_form' : comment_form,
+                      'comments': comments,
+                      'comment_form': comment_form,
                   }
                   )
+
 
 def document_delete(request, document_id):
     # 객체 불러와서 delete를 호출
@@ -446,6 +433,7 @@ def document_delete(request, document_id):
 
     # 과제 2 : bootstrap 적용해오기
 
+
 ########################
 # filter(field 이름) : 매칭
 # filter(field 이름__옵션) : 옵션으로 매칭
@@ -455,6 +443,7 @@ from allauth.account.signals import user_signed_up
 from allauth.socialaccount.models import SocialAccount
 from django.dispatch import receiver
 
+
 # 시그널이 발생했을 때 발생하는 실행될 함수
 @receiver(user_signed_up)
 def naver_signup(request, user, **kwargs):
@@ -462,10 +451,11 @@ def naver_signup(request, user, **kwargs):
     if social_user.exists():
         user.last_name = social_user[0].extra_data['name']
         user.save()
+
+
 # 시그널과 해당 함수를 connect
 # 시그널 연결 방법 2가지 receiver 쓰는 방법, connect 쓰는방법
 # user_signed_up.connect(naver_signup)
-
 
 
 # Todo 2019-05-17 금요일 수업
@@ -474,6 +464,8 @@ def naver_signup(request, user, **kwargs):
 dictionary 형태로 온다고 생각하면 된다
 """
 from django.http import JsonResponse
+
+
 def get_data_ajax(request):
     data = {
         "name": 'Jake',
@@ -482,7 +474,6 @@ def get_data_ajax(request):
     }
     return JsonResponse(data)
 
-import json
 
 def get_data_list(request):
     page = int(request.GET.get('page', 1))
@@ -494,12 +485,12 @@ def get_data_list(request):
     end_index = paginated_by * page
 
     documents = documents[start_index:end_index]
-    rng = range(1, math.ceil(total_count/paginated_by)+1)
+    rng = range(1, math.ceil(total_count / paginated_by) + 1)
 
     context = {
-                'object_list': documents,
-               'range': rng,
-               }
+        'object_list': documents,
+        'range': rng,
+    }
 
     # json_obj = render_to_string('board/document_list.html', context)
     return JsonResponse({'object_list': documents})

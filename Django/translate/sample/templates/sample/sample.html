@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="{{LANGUAGE_CODE}}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<center>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ language_form.as_p}}
+        <input type="submit" value="Change">
+    </form>
+
+    내용 출력 테스트
+    {% load i18n %}
+    {% trans '안녕하세요' %}
+    {% blocktrans context
+</center>
+
+</body>
+</html>

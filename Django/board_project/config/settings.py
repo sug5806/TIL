@@ -65,8 +65,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'common_templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'common_templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -137,32 +136,32 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-AWS_STORAGE_BUCKET_NAME = 'board.economy-info.site'
-AWS_S3_CUSTOM_DOMAIN = '%s' % AWS_STORAGE_BUCKET_NAME
-# AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME, AWS_REGION)
+# AWS_STORAGE_BUCKET_NAME = 'board.economy-info.site'
+# AWS_S3_CUSTOM_DOMAIN = '%s' % AWS_STORAGE_BUCKET_NAME
+# # AWS_S3_CUSTOM_DOMAIN = '%s.s3.%s.amazonaws.com' % (AWS_STORAGE_BUCKET_NAME, AWS_REGION)
+#
+# AWS_S3_SECURE_URLS = False
+# AWS_S3_OBJECT_PARAMETERS = {
+#     'CacheControl': 'max-age=86400',
+# }
+#
+#
+# AWS_DEFAULT_ACL = 'public-read'
+# AWS_LOCATION = 'static'
+#
+# STATIC_URL = 'http://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static')
+# ]
+#
+#
+# MEDIA_URL = '/res/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#
+# DEFAULT_FILE_STORAGE = 'config.asset_storage.MediaStorage'
 
-AWS_S3_SECURE_URLS = False
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-
-
-AWS_DEFAULT_ACL = 'public-read'
-AWS_LOCATION = 'static'
-
-STATIC_URL = 'http://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
-
-
-MEDIA_URL = '/res/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-DEFAULT_FILE_STORAGE = 'config.asset_storage.MediaStorage'
-
-# STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 
 
 # LOGGING = {
