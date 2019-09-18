@@ -1,4 +1,4 @@
-package main
+package _08_hello_world
 
 import "fmt"
 
@@ -8,23 +8,25 @@ func main() {
 	foo()
 	fmt.Println("something more")
 
-	for i :=0; i < 100; i++ {
-		if i % 2 == 0{
+	for i := 0; i < 100; i++ {
+		if i%2 == 0 {
 			fmt.Println(i)
 		}
 	}
 
 	bar()
+
 }
 
 func foo() {
-	fmt.Println("I'm in foo")
+	n, err := fmt.Println("I'm in foo", 42, true)
+	fmt.Println(n)
+	fmt.Println(err)
 }
 
 func bar() {
 	fmt.Println("and then we exited")
 }
-
 
 // control flow:
 // (1) sequence
