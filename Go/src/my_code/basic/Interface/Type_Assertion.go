@@ -1,12 +1,27 @@
 package main
 
+import (
+	"fmt"
+)
+
 func main() {
-	var a interface{} = 1
+	var myInt interface{} = 123
 
-	i := a
-	j := a.(int)
+	k, ok := myInt.(int)
+	if ok {
+		fmt.Println("Success:", k)
+	}
 
-	println(a)
-	println(i)
-	println(j)
+	v, ok := myInt.(float64)
+	if ok {
+		fmt.Println(v)
+	} else{
+		fmt.Println("Failed without panicking!")
+	}
+
+	i := myInt.(int)
+	fmt.Println("No checking:", i)
+
+	j := myInt.(bool)
+	fmt.Println(j)
 }
