@@ -19,6 +19,7 @@ func createSnippet(w http.ResponseWriter, r *http.Request){
 
 func main() {
 	mux := http.NewServeMux()
+	// 후행슬래시로 끝나면 마치 *(와일드카드)처럼 작동함
 	mux.HandleFunc("/", home)
 	mux.HandleFunc("/snippet", showSnippet)
 	mux.HandleFunc("/snippet/create", createSnippet)
